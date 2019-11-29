@@ -50,8 +50,6 @@ class batchAvSignal(Node):
     def __init__(self, name, params):
         super(batchAvSignal, self).__init__(name, params)
         self.evokedArrays = []
-        self.num = 0
-        self.times = []
         
     def process(self):
         
@@ -68,7 +66,7 @@ class batchAvSignal(Node):
         numChannels = len(self.evokedArrays[0][0].data)
         numTimes = len(self.evokedArrays[0][0].data[0])
         
-        # Imortant information for later
+        # Important information for later
         times = self.evokedArrays[0][0].times
         chNames = self.evokedArrays[0][0].info["ch_names"]
         eventNames = [e.comment for e in self.evokedArrays[0]]

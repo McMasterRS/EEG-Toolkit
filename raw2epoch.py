@@ -17,6 +17,7 @@ class Raw2EpochSettings(CustomSettings):
         self.baseLayout = QtWidgets.QVBoxLayout()
         self.layout = QtWidgets.QFormLayout()
         
+        # Minimum time
         self.tminWidget = QtWidgets.QSpinBox()
         self.tminWidget.setMinimum(-1000)
         self.tminWidget.setMaximum(0)
@@ -27,6 +28,7 @@ class Raw2EpochSettings(CustomSettings):
         self.tminLabel = QtWidgets.QLabel("TMin")
         self.layout.insertRow(-1, self.tminLabel, self.tminWidget)
         
+        # Maximum time
         self.tmaxWidget = QtWidgets.QSpinBox()
         self.tmaxWidget.setMinimum(1)
         self.tmaxWidget.setMaximum(1000)
@@ -35,12 +37,14 @@ class Raw2EpochSettings(CustomSettings):
         self.tmaxLabel = QtWidgets.QLabel("TMax")
         self.layout.insertRow(-1, self.tmaxLabel, self.tmaxWidget)
         
+        # Detrend type
         self.detrendWidget = QtWidgets.QComboBox()
         self.detrendWidget.addItems(["Constant", "Linear"])
         self.detrendLabel = LinkedCheckbox("Detrend Type", self.detrendWidget)
         self.detrendLabel.buildLinkedCheckbox("detrend", self.settings)
         self.layout.insertRow(-1, self.detrendLabel, self.detrendWidget)
         
+        # Verbose type
         self.verboseWidget = QtWidgets.QComboBox()
         self.verboseWidget.addItems(["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"])
         self.verboseLabel = LinkedCheckbox("Verbose Type", self.verboseWidget)

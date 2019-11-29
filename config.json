@@ -1,4 +1,6 @@
 {   
+    "name" : "EEG",
+    "docs" : "./docs",
     "global_variables":{
         "Channel Count" : {
             "file": "extensions.globalWidgets",
@@ -35,7 +37,6 @@
             "preset": "node_default",
             "file": "importEEGData.py",
             "alternate": true,
-            "position": "none",
             "category": "Input",
             "toolkit" : "EEG",
             "attributes": {
@@ -154,6 +155,50 @@
                     }
                 }
             }
+        },
+        "Import Epochs" : {
+            "preset": "node_default",
+            "file": "importEpochs.py",
+            "alternate": true,
+            "position": "none",
+            "category": "Input",
+            "toolkit" : "EEG",
+            "attributes": {
+                "Epoch Data": {
+                    "index": -1,
+                    "preset": "attr_preset_1",
+                    "plug": true,
+                    "socket": false,
+                    "type": "epoch"
+                }
+            },
+            "settings" : {
+                "settingsFile" : "importEpochData",
+                "settingsClass" : "ImportEpochSettings"
+            }
+            
+        },
+        "Import Evoked" : {
+            "preset": "node_default",
+            "file": "importEvoked.py",
+            "alternate": true,
+            "position": "none",
+            "category": "Input",
+            "toolkit" : "EEG",
+            "attributes": {
+                "Epoch Data": {
+                    "index": -1,
+                    "preset": "attr_preset_1",
+                    "plug": true,
+                    "socket": false,
+                    "type": "evoked"
+                }
+            },
+            "settings" : {
+                "settingsFile" : "importEpochData",
+                "settingsClass" : "ImportEpochSettings"
+            }
+            
         },
         "Raw To Epoch" : {
             "preset" : "node_default",

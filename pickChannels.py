@@ -1,4 +1,6 @@
 from pipeline.Node import Node
+from extensions.customSettings import CustomSettings
+from extensions.customWidgets import ExpandingTable
 import mne
 import sys
 
