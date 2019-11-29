@@ -1,6 +1,6 @@
 {   
     "name" : "EEG",
-    "docs" : "./docs",
+    "docs" : "./docs/build/html",
     "global_variables":{
         "Channel Count" : {
             "file": "extensions.globalWidgets",
