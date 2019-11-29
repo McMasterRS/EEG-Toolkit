@@ -173,7 +173,7 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "importEpochData",
+                "settingsFile" : "importEpochs",
                 "settingsClass" : "ImportEpochSettings"
             }
             
@@ -186,7 +186,7 @@
             "category": "Input",
             "toolkit" : "EEG",
             "attributes": {
-                "Epoch Data": {
+                "Evoked Data": {
                     "index": -1,
                     "preset": "attr_preset_1",
                     "plug": true,
@@ -195,10 +195,30 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "importEpochData",
+                "settingsFile" : "importEpochs",
                 "settingsClass" : "ImportEpochSettings"
-            }
-            
+            } 
+        },
+        "Import ICA" : {
+            "preset": "node_default",
+            "file": "importICA.py",
+            "alternate": true,
+            "position": "none",
+            "category": "Input",
+            "toolkit" : "EEG",
+            "attributes": {
+                "ICA Solution": {
+                    "index": -1,
+                    "preset": "attr_preset_1",
+                    "plug": true,
+                    "socket": false,
+                    "type": "ICA"
+                }
+            },
+            "settings" : {
+                "settingsFile" : "importEpochs",
+                "settingsClass" : "ImportEpochSettings"
+            } 
         },
         "Raw To Epoch" : {
             "preset" : "node_default",
@@ -303,7 +323,7 @@
             "file" : "fitICA.py",
             "alternate" : true,
             "position" : "none",
-            "category" : "ICA",
+            "category" : "Processing",
             "toolkit" : "EEG",
             "attributes" : {
                 "Raw/Epoch": {
@@ -331,7 +351,7 @@
             "file" : "applyICA.py",
             "alternate" : true,
             "position" : "none",
-            "category" : "ICA",
+            "category" : "Processing",
             "toolkit" : "EEG",
             "attributes" : {
                 "ICA Solution": {
@@ -364,50 +384,7 @@
                 }
             },
             "settings" : {}
-        },
-        
-        "Save Epochs" : {
-            "preset" : "node_default",
-            "file" : "saveEpochs.py",
-            "alternate" : true,
-            "position" : "none",
-            "category" : "Output",
-            "toolkit" : "EEG",
-            "attributes" : {
-                "Epochs": {     
-                    "index": -1,
-                    "preset": "attr_preset_1",
-                    "plug": false,
-                    "socket": true,
-                    "type": ["epoch"]   
-                }
-            },
-            "settings" : {
-                "settingsFile" : "saveEpochs",
-                "settingsClass" : "SaveEpochSettings"
-            }
-        },
-        "Save Evoked" : {
-            "preset" : "node_default",
-            "file" : "saveEvoked.py",
-            "alternate" : true,
-            "position" : "none",
-            "category" : "Output",
-            "toolkit" : "EEG",
-            "attributes" : {
-                "Evoked": {     
-                    "index": -1,
-                    "preset": "attr_preset_1",
-                    "plug": false,
-                    "socket": true,
-                    "type": ["evoked"]   
-                }
-            },
-            "settings" : {
-                "settingsFile" : "saveEpochs",
-                "settingsClass" : "SaveEpochSettings"
-            }
-        },
+        },      
         "EOG Correlation AC" : {
             "preset" : "node_default",
             "file" : "eogCorrelationArti.py",
@@ -555,12 +532,75 @@
                 "settingsClass" : "EogCorrelationArtiSettings"
             }
         },
+        "Save Epochs" : {
+            "preset" : "node_default",
+            "file" : "saveEpochs.py",
+            "alternate" : true,
+            "position" : "none",
+            "category" : "Output",
+            "toolkit" : "EEG",
+            "attributes" : {
+                "Epochs": {     
+                    "index": -1,
+                    "preset": "attr_preset_1",
+                    "plug": false,
+                    "socket": true,
+                    "type": ["epoch"]   
+                }
+            },
+            "settings" : {
+                "settingsFile" : "saveEpochs",
+                "settingsClass" : "SaveEpochSettings"
+            }
+        },
+        "Save Evoked" : {
+            "preset" : "node_default",
+            "file" : "saveEvoked.py",
+            "alternate" : true,
+            "position" : "none",
+            "category" : "Output",
+            "toolkit" : "EEG",
+            "attributes" : {
+                "Evoked": {     
+                    "index": -1,
+                    "preset": "attr_preset_1",
+                    "plug": false,
+                    "socket": true,
+                    "type": ["evoked"]   
+                }
+            },
+            "settings" : {
+                "settingsFile" : "saveEpochs",
+                "settingsClass" : "SaveEpochSettings"
+            }
+        },
+        "Save ICA" : {
+            "preset" : "node_default",
+            "file" : "saveICA.py",
+            "alternate" : true,
+            "position" : "none",
+            "category" : "Output",
+            "toolkit" : "EEG",
+            "attributes" : {
+                "ICA Solution": {     
+                    "index": -1,
+                    "preset": "attr_preset_1",
+                    "plug": false,
+                    "socket": true,
+                    "type": ["ICA"]   
+                }
+            },
+            "settings" : {
+                "settingsFile" : "saveEpochs",
+                "settingsClass" : "SaveEpochSettings"
+            }
+        },
         "Plot Sources" : {
             "preset" : "node_default",
             "file" : "plotSources.py",
             "alternate" : true,
             "position" : "none",
-            "category" : "Output",
+            "category" : "Plotting",
             "toolkit" : "EEG",
             "attributes" : {
                 "Data": {     
@@ -588,7 +628,7 @@
             "file" : "plotComponents.py",
             "alternate" : true,
             "position" : "none",
-            "category" : "Output",
+            "category" : "Plotting",
             "toolkit" : "EEG",
             "attributes" : {  
                 "ICA Solution": {     
@@ -609,7 +649,7 @@
             "file" : "plotProperties.py",
             "alternate" : true,
             "position" : "none",
-            "category" : "Output",
+            "category" : "Plotting",
             "toolkit" : "EEG",
             "attributes" : {
                 "Data": {     
@@ -637,7 +677,7 @@
             "file" : "evokedPeak.py",
             "alternate" : true,
             "position" : "none",
-            "category" : "Analysis",
+            "category" : "Plotting",
             "toolkit" : "EEG",
             "attributes" : {
                 "Evoked Data" : {
@@ -658,7 +698,7 @@
             "file" : "evokedLocalPeak.py",
             "alternate" : true,
             "position" : "none",
-            "category" : "Analysis",
+            "category" : "Plotting",
             "toolkit" : "EEG",
             "attributes" : {
                 "Evoked Data" : {
@@ -679,7 +719,7 @@
             "file" : "evokedCustomTimes.py",
             "alternate" : true,
             "position" : "none",
-            "category" : "Analysis",
+            "category" : "Plotting",
             "toolkit" : "EEG",
             "attributes" : {
                 "Evoked Data" : {
@@ -695,12 +735,12 @@
                 "settingsClass" : "PlotSettings"
             }
         },
-        "Compare Evokeds" : {
+        "Plot Evoked Comparison" : {
             "preset" : "node_default",
             "file" : "compareEvokeds.py",
             "alternate" : true,
             "position" : "none",
-            "category" : "Analysis",
+            "category" : "Plotting",
             "toolkit" : "EEG",
             "attributes" : {
                 "Evoked Data" : {
@@ -716,12 +756,12 @@
                 "settingsClass" : "PlotSettings"
             }
         },
-        "Bulk Peak Analysis" : {
+        "Batch Peak Analysis" : {
             "preset" : "node_default",
             "file" : "batchAnalysis.py",
             "alternate" : true,
             "position" : "none",
-            "category" : "Batch",
+            "category" : "Plotting",
             "toolkit" : "EEG",
             "attributes" : {
                 "Evoked Data" : {
@@ -737,12 +777,12 @@
                 "settingsClass" : "BatchAnalysisSettings"
             }
         },
-        "Bulk Average Signal" : {
+        "Batch Average Signal" : {
             "preset" : "node_default",
             "file" : "batchAvSignal.py",
             "alternate" : true,
             "position" : "none",
-            "category" : "Batch",
+            "category" : "Plotting",
             "toolkit" : "EEG",
             "attributes" : {
                 "Evoked Data" : {
@@ -763,7 +803,7 @@
             "file" : "dropEvokedChannels.py",
             "alternate" : true,
             "position" : "none",
-            "category" : "Drop Channels",
+            "category" : "Artifact Correction",
             "toolkit" : "EEG",
             "attributes" : {
                 "Evoked Data" : {
@@ -798,7 +838,7 @@
             "file" : "dropEpochChannels.py",
             "alternate" : true,
             "position" : "none",
-            "category" : "Drop Channels",
+            "category" : "Artifact Correction",
             "toolkit" : "EEG",
             "attributes" : {
                 "Epoch Data" : {
@@ -827,16 +867,6 @@
                 "settingsFile" : "dropEpochChannels",
                 "settingsClass" : "DropEpochChannelsSettings"
             }
-        },
-        "Pause" : {
-            "preset" : "node_default",
-            "file" : "pauseTest.py",
-            "alternate" : true,
-            "position" : "none",
-            "category" : "Test",
-            "toolkit" : "EEG",
-            "attributes" : {},
-            "settings" : {}
         }
     }
 }

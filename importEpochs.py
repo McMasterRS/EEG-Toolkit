@@ -1,6 +1,7 @@
 from pipeline.Node import Node
 from extensions.customSettings import CustomSettings
-from extensions.custonWidgets import loadWidget
+from extensions.customWidgets import loadWidget
+from PyQt5 import QtWidgets
 import mne
 
 class ImportEpochSettings(CustomSettings):
@@ -12,7 +13,7 @@ class ImportEpochSettings(CustomSettings):
         
         self.loadWidget = loadWidget(self, "Epoch File (*.fif)")
         self.loadWidget.loadSettings(settings)
-        self.layout.addWidget(self.loadWidget)
+        self.layout.addItem(self.loadWidget)
         
         self.setLayout(self.layout)
         
