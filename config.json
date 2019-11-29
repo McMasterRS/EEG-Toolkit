@@ -35,7 +35,7 @@
     "node_types": {
         "Import Montage File" : {
             "preset": "node_default",
-            "file": "importEEGData.py",
+            "file": "Input/importEEGData.py",
             "alternate": true,
             "category": "Input",
             "toolkit" : "EEG",
@@ -49,14 +49,14 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "importEEGData",
+                "settingsFile" : "Input/importEEGData",
                 "settingsClass" : "ImportDataSettings"
             }
             
         },
         "Import Channel Data" : {
             "preset": "node_default",
-            "file": "importEEGData.py",
+            "file": "Input/importEEGData.py",
             "alternate": true,
             "position": "none",
             "category": "Input",
@@ -71,14 +71,14 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "importEEGData",
+                "settingsFile" : "Input/importEEGData",
                 "settingsClass" : "ImportDataSettings"
             }
             
         },
         "Import Trigger Data" : {
             "preset": "node_default",
-            "file": "importEEGData.py",
+            "file": "Input/importEEGData.py",
             "alternate": true,
             "position": "none",
             "category": "Input",
@@ -93,14 +93,14 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "importEEGData",
+                "settingsFile" : "Input/importEEGData",
                 "settingsClass" : "ImportDataSettings"
             }
             
         },
         "Import Data": {
             "preset": "node_default",
-            "file": "importEEGData.py",
+            "file": "Input/importEEGData.py",
             "alternate": true,
             "position": "none",
             "category": "Input",
@@ -122,7 +122,7 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "importEEGData",
+                "settingsFile" : "Input/importEEGData",
                 "settingsClass" : "ImportDataSettings",
                 "file" : {
                     "text" : "File",
@@ -158,7 +158,7 @@
         },
         "Import Epochs" : {
             "preset": "node_default",
-            "file": "importEpochs.py",
+            "file": "Input/importEpochs.py",
             "alternate": true,
             "position": "none",
             "category": "Input",
@@ -173,14 +173,14 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "importEpochs",
+                "settingsFile" : "Input/importEpochs",
                 "settingsClass" : "ImportEpochSettings"
             }
             
         },
         "Import Evoked" : {
             "preset": "node_default",
-            "file": "importEvoked.py",
+            "file": "Input/importEvoked.py",
             "alternate": true,
             "position": "none",
             "category": "Input",
@@ -195,13 +195,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "importEpochs",
+                "settingsFile" : "Input/importEpochs",
                 "settingsClass" : "ImportEpochSettings"
             } 
         },
         "Import ICA" : {
             "preset": "node_default",
-            "file": "importICA.py",
+            "file": "Input/importICA.py",
             "alternate": true,
             "position": "none",
             "category": "Input",
@@ -216,13 +216,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "importEpochs",
+                "settingsFile" : "Input/importEpochs",
                 "settingsClass" : "ImportEpochSettings"
             } 
         },
         "Raw To Epoch" : {
             "preset" : "node_default",
-            "file" : "raw2epoch.py",
+            "file" : "Processing/raw2epoch.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Processing",
@@ -258,13 +258,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "raw2epoch",
+                "settingsFile" : "Processing/raw2epoch",
                 "settingsClass" : "Raw2EpochSettings"
             }
         },
         "Filter" : {
             "preset" : "node_default",
-            "file" : "filter.py",
+            "file" : "Processing/filter.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Processing",
@@ -286,13 +286,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "filter",
+                "settingsFile" : "Processing/filter",
                 "settingsClass" : "FilterSettings"
             }
         },
         "Create Evoked" : {
             "preset" : "node_default",
-            "file" : "evoked.py",
+            "file" : "Processing/evoked.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Processing",
@@ -314,13 +314,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "evoked",
+                "settingsFile" : "Processing/evoked",
                 "settingsClass" : "EvokedSettings"
             }
         },
         "Fit ICA" : {
             "preset" : "node_default",
-            "file" : "fitICA.py",
+            "file" : "Processing/fitICA.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Processing",
@@ -342,13 +342,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "fitICA",
+                "settingsFile" : "Processing/fitICA",
                 "settingsClass" : "FitICASettings"
             }
         },
         "Apply ICA" : {
             "preset" : "node_default",
-            "file" : "applyICA.py",
+            "file" : "Processing/applyICA.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Processing",
@@ -387,7 +387,7 @@
         },      
         "EOG Correlation AC" : {
             "preset" : "node_default",
-            "file" : "eogCorrelationArti.py",
+            "file" : "AC/eogCorrelationArti.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Artifact Correction",
@@ -430,13 +430,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "eogCorrelationArti",
+                "settingsFile" : "AC/eogCorrelationArti",
                 "settingsClass" : "EogCorrelationArtiSettings"
             }
         },
         "EEG Correlation AC" : {
             "preset" : "node_default",
-            "file" : "eegCorrelationArti.py",
+            "file" : "AC/eegCorrelationArti.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Artifact Correction",
@@ -479,13 +479,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "eogCorrelationArti",
+                "settingsFile" : "AC/eogCorrelationArti",
                 "settingsClass" : "EogCorrelationArtiSettings"
             }
         },
         "ECG Correlation AC" : {
             "preset" : "node_default",
-            "file" : "ecgCorrelationArti.py",
+            "file" : "AC/ecgCorrelationArti.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Artifact Correction",
@@ -528,13 +528,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "eogCorrelationArti",
+                "settingsFile" : "AC/eogCorrelationArti",
                 "settingsClass" : "EogCorrelationArtiSettings"
             }
         },
         "Save Epochs" : {
             "preset" : "node_default",
-            "file" : "saveEpochs.py",
+            "file" : "Output/saveEpochs.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Output",
@@ -549,13 +549,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "saveEpochs",
+                "settingsFile" : "Output/saveEpochs",
                 "settingsClass" : "SaveEpochSettings"
             }
         },
         "Save Evoked" : {
             "preset" : "node_default",
-            "file" : "saveEvoked.py",
+            "file" : "Output/saveEvoked.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Output",
@@ -570,13 +570,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "saveEpochs",
+                "settingsFile" : "Output/saveEpochs",
                 "settingsClass" : "SaveEpochSettings"
             }
         },
         "Save ICA" : {
             "preset" : "node_default",
-            "file" : "saveICA.py",
+            "file" : "Output/saveICA.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Output",
@@ -591,13 +591,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "saveEpochs",
+                "settingsFile" : "Output/saveEpochs",
                 "settingsClass" : "SaveEpochSettings"
             }
         },
         "Plot Sources" : {
             "preset" : "node_default",
-            "file" : "plotSources.py",
+            "file" : "Plotting/plotSources.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Plotting",
@@ -619,13 +619,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "plotProperties",
+                "settingsFile" : "Plotting/plotProperties",
                 "settingsClass" : "PlotSettings"
             }
         },
         "Plot Components" : {
             "preset" : "node_default",
-            "file" : "plotComponents.py",
+            "file" : "Plotting/plotComponents.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Plotting",
@@ -640,13 +640,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "plotProperties",
+                "settingsFile" : "Plotting/plotProperties",
                 "settingsClass" : "PlotSettings"
             }
         },
         "Plot Properties" : {
             "preset" : "node_default",
-            "file" : "plotProperties.py",
+            "file" : "Plotting/plotProperties.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Plotting",
@@ -668,13 +668,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "plotProperties",
+                "settingsFile" : "Plotting/plotProperties",
                 "settingsClass" : "PlotSettings"
             }
         },
         "Plot Peak" : {
             "preset" : "node_default",
-            "file" : "evokedPeak.py",
+            "file" : "Plotting/evokedPeak.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Plotting",
@@ -689,13 +689,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "plotProperties",
+                "settingsFile" : "Plotting/plotProperties",
                 "settingsClass" : "PlotSettings"
             }
         },
         "Plot Local Peaks" : {
             "preset" : "node_default",
-            "file" : "evokedLocalPeak.py",
+            "file" : "Plotting/evokedLocalPeak.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Plotting",
@@ -710,13 +710,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "plotProperties",
+                "settingsFile" : "Plotting/plotProperties",
                 "settingsClass" : "PlotSettings"
             }
         },
         "Plot Evoked Times" : {
             "preset" : "node_default",
-            "file" : "evokedCustomTimes.py",
+            "file" : "Plotting/evokedCustomTimes.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Plotting",
@@ -731,13 +731,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "plotProperties",
+                "settingsFile" : "Plotting/plotProperties",
                 "settingsClass" : "PlotSettings"
             }
         },
         "Plot Evoked Comparison" : {
             "preset" : "node_default",
-            "file" : "compareEvokeds.py",
+            "file" : "Plotting/compareEvokeds.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Plotting",
@@ -752,13 +752,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "plotProperties",
+                "settingsFile" : "Plotting/plotProperties",
                 "settingsClass" : "PlotSettings"
             }
         },
         "Batch Peak Analysis" : {
             "preset" : "node_default",
-            "file" : "batchAnalysis.py",
+            "file" : "Plotting/batchAnalysis.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Plotting",
@@ -773,13 +773,13 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "batchAnalysis",
+                "settingsFile" : "Plotting/batchAnalysis",
                 "settingsClass" : "BatchAnalysisSettings"
             }
         },
         "Batch Average Signal" : {
             "preset" : "node_default",
-            "file" : "batchAvSignal.py",
+            "file" : "Plotting/batchAvSignal.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Plotting",
@@ -794,13 +794,13 @@
                 }   
             },
             "settings" : {
-                "settingsFile" : "batchAvSignal",
+                "settingsFile" : "Plotting/batchAvSignal",
                 "settingsClass" : "BatchAvSignalSettings"
             }
         },    
         "Drop Evoked Channels" : {
             "preset" : "node_default",
-            "file" : "dropEvokedChannels.py",
+            "file" : "AC/dropEvokedChannels.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Artifact Correction",
@@ -829,13 +829,13 @@
                 }                  
             },
             "settings" : {
-                "settingsFile" : "dropEvokedChannels",
+                "settingsFile" : "AC/dropEvokedChannels",
                 "settingsClass" : "DropEvokedChannelsSettings"
             }
         },
         "Drop Epoch Channels" : {
             "preset" : "node_default",
-            "file" : "dropEpochChannels.py",
+            "file" : "AC/dropEpochChannels.py",
             "alternate" : true,
             "position" : "none",
             "category" : "Artifact Correction",
@@ -864,7 +864,7 @@
                 }                  
             },
             "settings" : {
-                "settingsFile" : "dropEpochChannels",
+                "settingsFile" : "AC/dropEpochChannels",
                 "settingsClass" : "DropEpochChannelsSettings"
             }
         }
