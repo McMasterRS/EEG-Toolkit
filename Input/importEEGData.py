@@ -1,7 +1,8 @@
 from pipeline.Node import Node
 import mne 
 import numpy as np
-import os
+import os, sys
+import matplotlib.pyplot as plt
 
 from extensions.customSettings import CustomSettings
 
@@ -19,54 +20,40 @@ class importEEGData(Node):
         assert(self.parameters["file"] is not ""), "ERROR: Import Data node has no input file set. Please update the node's settings and re-run"
         
         self.parameters["updateGlobal"] = True
-        self.parameters["files"] = ["C:/Users/mudwayt/Documents/GitHub/WARIO/saves/Data/MWEEG_Subject_0.npz",     "C:/Users/mudwayt/Documents/GitHub/WARIO/saves/Data/MWEEG_Subject_9.npz"]
         self.parameters["makeFolders"] = True
+        self.parameters["files"] = []
+        
+        path = "C://Users/mudwayt/Documents/CANARIE/EEG/testData/" 
+        for dirpath, dnames, fnames in os.walk(path):   
+            for fname in fnames:
+                self.parameters["files"].append(dirpath + fname)
+                
+            break
+        
 
     def process(self):
-  
+        np.set_printoptions(suppress=True)
         currentFile = self.parameters["files"][0]
-        data = np.load(currentFile)
-        print(data)
-        
+        data = mne.io.read_raw_bdf(currentFile, stim_channel = -1)
+        print(data.get_data(-1)[0])
+        #plt.plot(np.right_shift(data.get_data(-1)[0].astype("uint"), 8))
+        #plt.show()
+        #print(np.unique(np.int16(data.get_data(-1)), return_counts = True))
+        events = mne.find_events(data, uint_cast = True, mask = 2**8 - 1, min_duration = 0.1)
+        print(events)
+        epochs = mne.Epochs(data, events)
+        print(epochs)
+        epochs.plot()   
         # Update the global filename variable with each new file
         # Useful for batch jobs where you want each dataset to output results with matching names
         if self.parameters["updateGlobal"] == True:
             self.global_vars["Output Filename"] = os.path.splitext(os.path.split(currentFile)[1])[0]
-
+            
         # Save output from each data file in its own folder
         if self.parameters["makeFolders"] == True:
             dir = os.path.join(self.global_vars["Output Folder"].getVal(), self.global_vars["Output Filename"])
             self.global_vars["Output Filename"] = os.path.join(self.global_vars["Output Filename"], self.global_vars["Output Filename"])
             if not os.path.isdir(dir):
                 os.mkdir(dir)
-              
-        sfreq = self.parameters["sfreq"]
-        
-        trigTimes = data["SampleTime"][data["TriggerTime"] != 0.][:13] ## FIXME
-        trigData = [data["TriggerValues"], trigTimes]
-        
-        filenameNoExt = self.parameters["montageData"].split(".")[0]
-        file = filenameNoExt.split("/")[-1]
-        folder = filenameNoExt[:-1*len(file)]
-
-        montage = mne.channels.read_montage(kind = file, ch_names = None, path = folder, transform = True)
-        ch_names = montage.ch_names
-        
-        ch_types = open(self.parameters["channelTypes"], 'r').read().split(",")
-
-        info = mne.create_info(ch_names = ch_names[-16:], sfreq = sfreq, ch_types = ch_types)
-        raw = mne.io.RawArray(data["EEG"], info, first_samp = 0)
-        
-        raw.set_montage(montage, set_dig=True) 
-        raw.pick_types(eeg=True,exclude='bads')
-        raw.set_eeg_reference('average',projection=False)
-        
-        # Check if more data needs to be ran
-        self.parameters["files"].pop(0)
-        self.done = not len(self.parameters["files"]) > 0
-            
-        return {"Raw" : raw, "Triggers" : trigData}    
-        
-# ISSUES:
-#   - Need to only pull in eeg channels
-#   - Need to confirm this works with multiple input file types
+                
+        return{"Raw" : data, "Triggers" : events}

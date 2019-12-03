@@ -96,6 +96,7 @@ class FilterSettings(CustomSettings):
         self.method.currentIndexChanged.connect(self.updateMethod)
         if "method" in settings.keys():
             self.method.setCurrentText(settings["method"])
+        self.updateName(self.method.currentIndex())
             
         self.form.insertRow(-1, methodLabel, self.method)
         self.form.insertRow(-1, phaseLabel, self.phase)
