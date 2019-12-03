@@ -2,20 +2,6 @@
     "name" : "EEG",
     "docs" : "./docs/build/html",
     "global_variables":{
-        "Channel Count" : {
-            "file": "extensions.globalWidgets",
-            "class": "GlobalSpinbox",
-            "type"  : "Int",
-            "value" : 32,
-            "const" : false
-        },
-        "Data Length" : {
-            "file": "extensions.globalWidgets",
-            "class": "GlobalSpinbox",
-            "type"  : "Int",
-            "value" : 100,
-            "const" : false
-        },
         "Output Folder" : {
             "file": "extensions.globalWidgets",
             "class": "GlobalFolderSelect",
@@ -100,7 +86,7 @@
         },
         "Import Data": {
             "preset": "node_default",
-            "file": "Input/importEEGData.py",
+            "file": "Input/importDataOld.py",
             "alternate": true,
             "position": "none",
             "category": "Input",
@@ -121,9 +107,7 @@
                     "type": "trigTV"
                 }
             },
-            "settings" : {
-                "settingsFile" : "Input/importEEGData",
-                "settingsClass" : "ImportDataSettings",
+            "settings" : {  
                 "file" : {
                     "text" : "File",
                     "type" : "loadbox",

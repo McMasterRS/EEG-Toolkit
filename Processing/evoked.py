@@ -15,7 +15,7 @@ class EvokedSettings(CustomSettings):
         self.layout = QtWidgets.QFormLayout()
         self.eventIDWidget = ExpandingTable("eventIDs", settings)
         self.eventIDWidget.setHorizontalHeaderLabels(["Event ID"])
-        self.layout.addWidget(self.eventIDWidget)
+        #self.layout.addWidget(self.eventIDWidget)
         
         self.setLayout(self.layout)
         
@@ -27,22 +27,24 @@ class EvokedSettings(CustomSettings):
         settings["settingsFile"] = self.settings["settingsFile"]
         settings["settingsClass"] = self.settings["settingsClass"]
         
-        self.eventIDWidget.getSettings("eventIDs", vars, settings)
+        #self.eventIDWidget.getSettings("eventIDs", vars, settings)
         
         self.parent.settings = settings
         self.parent.variables = vars
 
 class evoked(Node):
 
-    def __init__(self, name, params):
+    def __init__(self, name, params):   
         super(evoked, self).__init__(name, params)
     
     def process(self):
         epochs = self.args["Epoch Data"]
         
+        eventIDs = [str(i) for i in self.global_vars["Event Names"].getVal()]
+        
         # create Evoked object
         evoked = [epochs[name].average() for name in self.parameters["eventIDs"].keys()]
-        for i, name in enumerate(self.parameters["eventIDs"].keys()):
+        for i, name in enumerate(eventIDs):
             evoked[i].comment = name
         
         return {"Evoked Data" : evoked}

@@ -98,7 +98,7 @@ class FitICASettings(CustomSettings):
         self.stopWidget = LinkedSpinbox()
         self.stopLabel = LinkedCheckbox("Stop", self.stopWidget)
         self.stopLabel.buildLinkedCheckbox("stop", self.settings)
-        self.stopLabel.setMaximum(10**300)
+        self.stopWidget.setMaximum(10**12)
         self.layout.insertRow(-1, self.stopLabel, self.stopWidget)
         
         # Link start and stop
@@ -111,12 +111,7 @@ class FitICASettings(CustomSettings):
         
         self.baseLayout.addItem(self.layout)
         self.baseLayout.addWidget(self.criterionWidget)
-        self.setLayout(self.baseLayout)
-        return
-        
-    def updateGlobals(self, globals):
-        self.stopWidget.setMaximum(int(globals["Data Length"]["value"]))
-        return   
+        self.setLayout(self.baseLayout) 
         
     # Return the values from each setting type
     def genSettings(self):

@@ -12,10 +12,10 @@ class ImportDataSettings(CustomSettings):
         super(ImportDataSettings, self).__init__(parent, settings)
         
         
-class importEEGData(Node):
+class importDataOld(Node):
 
     def __init__(self, name, params = None):
-        super(importEEGData, self).__init__(name, params)
+        super(importDataOld, self).__init__(name, params)
         assert(self.parameters["file"] is not ""), "ERROR: Import Data node has no input file set. Please update the node's settings and re-run"
         
         self.parameters["updateGlobal"] = True

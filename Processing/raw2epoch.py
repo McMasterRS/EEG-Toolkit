@@ -51,11 +51,11 @@ class Raw2EpochSettings(CustomSettings):
         self.verboseLabel.buildLinkedCheckbox("verbose", self.settings)
         self.layout.insertRow(-1, self.verboseLabel, self.verboseWidget)
         
-        self.eventIDWidget = ExpandingTable("eventIDs", settings)
-        self.eventIDWidget.setHorizontalHeaderLabels(["Event ID"])
+        #self.eventIDWidget = ExpandingTable("eventIDs", settings)
+        #self.eventIDWidget.setHorizontalHeaderLabels(["Event ID"])
         
         self.baseLayout.addItem(self.layout)
-        self.baseLayout.addWidget(self.eventIDWidget)
+        #self.baseLayout.addWidget(self.eventIDWidget)
         
         self.setLayout(self.baseLayout)
         
@@ -74,7 +74,7 @@ class Raw2EpochSettings(CustomSettings):
         self.detrendLabel.getSettings("detrend", vars, settings)
         self.verboseLabel.getSettings("verbose", vars, settings)
         
-        self.eventIDWidget.getSettings("eventIDs", vars, settings)
+        #self.eventIDWidget.getSettings("eventIDs", vars, settings)
         
         self.parent.settings = settings
         self.parent.variables = vars
@@ -98,8 +98,12 @@ class raw2epoch(Node):
         T = self.args["Trigger Times/Values"][1]
         Y = self.args["Trigger Times/Values"][0]
         
-        print("Converting raw file into epoch data")
+        idList = self.global_vars["Event Names"].getVal()
+        eventIDs = {}
+        for i, id in enumerate(idList):
+            eventIDs[id] = i + 1
         
+        print("Converting raw file into epoch data")
         # MNE needs trigger data in a certain format
         trigger_data = np.concatenate((np.expand_dims(T*sfreq,axis=1),
                                        np.zeros((T.shape[0],1)),
@@ -108,7 +112,7 @@ class raw2epoch(Node):
         # create Epochs object
         Epochs = mne.Epochs(Raw, 
                             events=trigger_data, 
-                            event_id = self.parameters["eventIDs"],
+                            event_id = eventIDs,
                             tmin=-self.parameters["tmin"], 
                             tmax=self.parameters["tmax"],
                             proj=False, 
