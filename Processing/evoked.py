@@ -43,7 +43,7 @@ class evoked(Node):
         eventIDs = [str(i) for i in self.global_vars["Event Names"].getVal()]
         
         # create Evoked object
-        evoked = [epochs[name].average() for name in self.parameters["eventIDs"].keys()]
+        evoked = [epochs[name].average() for name in eventIDs]
         for i, name in enumerate(eventIDs):
             evoked[i].comment = name
         
