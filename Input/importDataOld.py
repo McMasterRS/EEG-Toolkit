@@ -64,8 +64,13 @@ class importDataOld(Node):
         # Check if more data needs to be ran
         self.parameters["files"].pop(0)
         self.done = not len(self.parameters["files"]) > 0
+        
+                # MNE needs trigger data in a certain format
+        events = np.concatenate((np.expand_dims(T*sfreq,axis=1),
+                                       np.zeros((T.shape[0],1)),
+                                       np.expand_dims(Y,axis=1)),axis=1).astype(int)
             
-        return {"Raw" : raw, "Triggers" : trigData}    
+        return {"Raw" : raw, "Events" : events}    
         
 # ISSUES:
 #   - Need to only pull in eeg channels

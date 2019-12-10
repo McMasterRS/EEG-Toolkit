@@ -17,7 +17,6 @@
             "const" : false
         }
     },
-
     "node_types": {
         "Import Montage File" : {
             "preset": "node_default",
@@ -84,7 +83,7 @@
             }
             
         },
-        "Import Data": {
+        "Import Data Old": {
             "preset": "node_default",
             "file": "Input/importDataOld.py",
             "alternate": true,
@@ -99,12 +98,12 @@
                     "socket": false,
                     "type": "rawEEG"
                 },
-                "Triggers": {
+                "Events": {
                     "index": -1,
                     "preset": "attr_preset_1",
                     "plug": true,
                     "socket": false,
-                    "type": "trigTV"
+                    "type": "events"
                 }
             },
             "settings" : {  
@@ -138,6 +137,34 @@
                         "value" : 100
                     }
                 }
+            }
+        },
+        "Import Data": {
+            "preset": "node_default",
+            "file": "Input/importEEGData.py",
+            "alternate": true,
+            "position": "none",
+            "category": "Input",
+            "toolkit" : "EEG",
+            "attributes": {
+                "Raw": {
+                    "index": -1,
+                    "preset": "attr_preset_1",
+                    "plug": true,
+                    "socket": false,
+                    "type": "rawEEG"
+                },
+                "Events": {
+                    "index": -1,
+                    "preset": "attr_preset_1",
+                    "plug": true,   
+                    "socket": false,
+                    "type": "events"
+                }
+            },
+            "settings" : {  
+                "settingsFile" : "Input/importEEGData",
+                "settingsClass" : "ImportDataSettings"
             }
         },
         "Import Epochs" : {
@@ -219,12 +246,12 @@
                     "socket": true,
                     "type": ["rawEEG"]
                 },
-                "Trigger Times/Values": {
+                "Events": {
                     "index": -1,
                     "preset": "attr_preset_1",
                     "plug": false,
                     "socket": true,
-                    "type": ["trigTV"]
+                    "type": ["events"]
                 },
                 "Epoch Data": {
                     "index": -1,
@@ -232,13 +259,6 @@
                     "plug": true,
                     "socket": false,
                     "type": "epoch"
-                },
-                "Trigger Data": {
-                    "index": -1,
-                    "preset": "attr_preset_1",
-                    "plug": true,
-                    "socket": false,
-                    "type": "trigData"
                 }
             },
             "settings" : {
@@ -537,7 +557,7 @@
                 "settingsClass" : "SaveEpochSettings"
             }
         },
-        "Save Evoked" : {
+        "Save Evoked" : {   
             "preset" : "node_default",
             "file" : "Output/saveEvoked.py",
             "alternate" : true,

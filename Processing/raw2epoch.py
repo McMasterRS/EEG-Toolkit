@@ -95,23 +95,17 @@ class raw2epoch(Node):
         
         verboseDict = {None : None, 0 : "DEBUG", 1 : "INFO", 2 : "WARNING", 3 : "ERROR", 4 : "CRITICAL"}
         
-        T = self.args["Trigger Times/Values"][1]
-        Y = self.args["Trigger Times/Values"][0]
         
         idList = self.global_vars["Event Names"].getVal()
         eventIDs = {}
         for i, id in enumerate(idList):
-            eventIDs[id] = i + 1
+            eventIDs[id] = (i+1)*10
         
         print("Converting raw file into epoch data")
-        # MNE needs trigger data in a certain format
-        trigger_data = np.concatenate((np.expand_dims(T*sfreq,axis=1),
-                                       np.zeros((T.shape[0],1)),
-                                       np.expand_dims(Y,axis=1)),axis=1).astype(int)
         
         # create Epochs object
         Epochs = mne.Epochs(Raw, 
-                            events=trigger_data, 
+                            events=self.args["Events"], 
                             event_id = eventIDs,
                             tmin=-self.parameters["tmin"], 
                             tmax=self.parameters["tmax"],
@@ -125,4 +119,4 @@ class raw2epoch(Node):
                             detrend=self.parameters["detrend"], 
                             verbose=verboseDict[self.parameters["verbose"]])
   
-        return {"Epoch Data" : Epochs, "Trigger Data" :trigger_data}
+        return {"Epoch Data" : Epochs}
