@@ -671,8 +671,8 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "Plotting/plotProperties",
-                "settingsClass" : "PlotSettings"
+                "settingsFile" : "Plotting/evokedLocalPeak",
+                "settingsClass" : "EvokedLocalPeakSettings"
             }
         },
         "Plot Evoked Times" : {
@@ -692,8 +692,8 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "Plotting/plotProperties",
-                "settingsClass" : "PlotSettings"
+                "settingsFile" : "Plotting/evokedLocalPeak",
+                "settingsClass" : "EvokedLocalPeakSettings"
             }
         },
         "Plot Evoked Comparison" : {
@@ -713,8 +713,8 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "Plotting/plotProperties",
-                "settingsClass" : "PlotSettings"
+                "settingsFile" : "Plotting/evokedLocalPeak",
+                "settingsClass" : "EvokedLocalPeakSettings"
             }
         },
         "Batch Peak Analysis" : {

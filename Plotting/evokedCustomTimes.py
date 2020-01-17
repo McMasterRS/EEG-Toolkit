@@ -25,11 +25,11 @@ class evokedCustomTimes(Node):
             fig = evoked.plot_joint(title = "Event ID {0}".format(evoked.comment),
                               times=np.arange(max / 10.0, max, max / 10.0), show = False)      
                 
-            if self.parameters["saveGraph"] is not None:
+            if self.parameters["toggleSaveGraph"] is not None:
                 if "globalSaveStart" in self.parameters.keys():
                     f = self.parameters["globalSaveStart"] + self.global_vars["Output Filename"] + self.parameters["globalSaveEnd"]
                 else:
-                    f = self.parameters["saveGraph"]
+                    f = self.parameters["saveGraphGraph"]
                 type = f.split(".")[-1]
                 name = f.split(".")[0]
                 f = name + "_{0}.".format(i) + type
@@ -40,7 +40,7 @@ class evokedCustomTimes(Node):
                 elif type == "pkl":
                     pickle.dump(fig, open(f, "wb"))
                     
-            if self.parameters["showGraph"] == True:
+            if self.parameters["toggleShowGraph"] == True:
                 with tempfile.NamedTemporaryFile(dir='./wariotmp/imgs/', delete=False) as temp:
                     fig.savefig(temp.name, dpi = 300, format = "png")
                     

@@ -20,7 +20,7 @@ class EvokedLocalPeakSettings(CustomSettings):
         self.layout = QtWidgets.QFormLayout()
         self.layout.setContentsMargins(0, 0, 0, 0)
         
-        self.saveTab = BatchSaveTab("Graph", "graph", settings)
+        self.saveTab = BatchSaveTab("Graph", "graph", settings, pkl = False)
         self.layout.addWidget(self.saveTab)
         
         self.setLayout(self.layout)
@@ -53,11 +53,11 @@ class evokedLocalPeak(Node):
             chName, latency, amplitude = evoked.get_peak(return_amplitude = True)
             fig = evoked.plot_joint(title = "Local Peaks for event ID {0}".format(evoked.comment), show = False)
             
-            if self.parameters["saveGraph"] is not None:
+            if self.parameters["toggleSaveGraph"] is not None:
                 if "globalSaveStart" in self.parameters.keys():
                     f = self.parameters["globalSaveStart"] + self.global_vars["Output Filename"] + self.parameters["globalSaveEnd"]
                 else:
-                    f = self.parameters["saveGraph"]
+                    f = self.parameters["saveGraphGraph"]
                 type = f.split(".")[-1]
                 name = f.split(".")[0]
                 f = name + "_{0}.".format(i) + type
@@ -68,7 +68,7 @@ class evokedLocalPeak(Node):
                 elif type == "pkl":
                     pickle.dump(fig, open(f, "wb"))
                 
-            if self.parameters["showGraph"] == True:
+            if self.parameters["toggleShowGraph"] == True:
                 with tempfile.NamedTemporaryFile(dir='./wariotmp/imgs/', delete=False) as temp:
                     fig.savefig(temp.name, dpi = 300, format = "png")
                     

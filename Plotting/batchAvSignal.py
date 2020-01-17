@@ -24,8 +24,8 @@ class BatchAvSignalSettings(CustomSettings):
         self.dataSave = BatchSaveTab("Data", "data", settings)
         self.graphSave = BatchSaveTab("Graph", "graph", settings)
         
-        self.tabs.addTab(self.dataSave, "Save Data")
-        self.tabs.addTab(self.graphSave, "Save Graph")
+        self.tabs.addTab(self.dataSave, "Data Settings")
+        self.tabs.addTab(self.graphSave, "Graph Settings")
         
         self.layout.addWidget(self.tabs)
         self.setLayout(self.layout)

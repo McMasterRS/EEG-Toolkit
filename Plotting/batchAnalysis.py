@@ -48,9 +48,9 @@ class BatchAnalysisSettings(CustomSettings):
         self.meanSave = BatchSaveTab("Mean", "graph", settings)
         self.stdSave = BatchSaveTab("Std", "graph", settings)
         
-        self.tabs.addTab(self.dataSave, "Save Data")
-        self.tabs.addTab(self.meanSave, "Save Mean plots")
-        self.tabs.addTab(self.stdSave, "Save σ Plots")
+        self.tabs.addTab(self.dataSave, "Data Settings")
+        self.tabs.addTab(self.meanSave, "Mean Plot Settings")
+        self.tabs.addTab(self.stdSave, "σ Plot Settings")
         
         self.layout.addWidget(self.tabs)
         
