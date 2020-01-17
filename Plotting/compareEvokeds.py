@@ -2,6 +2,8 @@ from pipeline.Node import Node
 from extensions.customSettings import CustomSettings
 import mne
 import matplotlib.pyplot as plt
+import pickle
+import tempfile
 
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
@@ -26,13 +28,14 @@ def process(self):
                 f = self.parameters["saveGraph"]
             type = f.split(".")[-1]
             if type == "png":
-                fig.savefig(f, format = "png")
+                fig.savefig(f, dpi = 300, format = "png")
             elif type == "pdf":
                 fig.savefig(f, format = "pdf")
             elif type == "pkl":
                 pickle.dump(fig, open(f, "wb"))
         
         if self.parameters["showGraph"] == True:
-            fig.show()
-        else:
-            plt.close(fig)
+            with tempfile.NamedTemporaryFile(dir='./wariotmp/plots/', delete=False) as temp:
+                    pickle.dump(fig, open(temp.name, 'wb'))
+                    
+        plt.close(fig)

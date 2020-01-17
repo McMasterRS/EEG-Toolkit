@@ -4,6 +4,8 @@ from extensions.customSettings import CustomSettings
 import mne
 import numpy as np
 import matplotlib.pyplot as plt
+import pickle
+import tempfile
 
 from extensions.customWidgets import LinkedSpinbox, BatchSavePanel, BatchSaveTab
 
@@ -168,10 +170,11 @@ class batchAnalysis(Node):
             elif type == "pkl":
                 pickle.dump(fig, open(f, "wb"))
         
-            if self.parameters["toggleShowMean"]:
-                fig.show()
-            else:
-                plt.close(fig)
+        if self.parameters["toggleShowMean"]:
+            with tempfile.NamedTemporaryFile(dir='./wariotmp/plots/', delete=False) as temp:
+                    pickle.dump(fig, open(temp.name, 'wb'))
+                    
+        plt.close(fig)
             
             
         if self.parameters["toggleSaveStd"]:
@@ -194,15 +197,16 @@ class batchAnalysis(Node):
             
             type = f.split(".")[-1]
             if type == "png":
-                fig2.savefig(f, format = "png")
+                fig2.savefig(f, dpi = 300, format = "png")
             elif type == "pdf":
                 fig2.savefig(f, format = "pdf")
             elif type == "pkl":
                 pickle.dump(fig2, open(f, "wb"))
                 
-            if self.parameters["toggleShowStd"]:
-                fig2.show()
-            else:
-                plt.close(fig2)
-       
+        if self.parameters["toggleShowStd"]:
+            with tempfile.NamedTemporaryFile(dir='./wariotmp/plots/', delete=False) as temp:
+                    pickle.dump(fig2, open(temp.name, 'wb'))
+                    
+        plt.close(fig)
+            
         return

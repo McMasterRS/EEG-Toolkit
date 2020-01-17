@@ -51,11 +51,32 @@ class Raw2EpochSettings(CustomSettings):
         self.verboseLabel.buildLinkedCheckbox("verbose", self.settings)
         self.layout.insertRow(-1, self.verboseLabel, self.verboseWidget)
         
-        #self.eventIDWidget = ExpandingTable("eventIDs", settings)
-        #self.eventIDWidget.setHorizontalHeaderLabels(["Event ID"])
+        # Baseline
+        self.baselineMin = QtWidgets.QDoubleSpinBox()
+        self.baselineMin.setMinimum(-10000.0)
+        self.baselineMin.setMaximum(10000.0)
+        if "baselineMin" not in settings.keys():
+            self.baselineMin.setValue(-0.2)
+        else:
+            self.baselineMin.setValue(settings["baselineMin"])
+            
+        self.baselineMinLabel = LinkedCheckbox("Baseline Min Time", self.baselineMin)
+        self.baselineMinLabel.buildLinkedCheckbox("baselineMin", self.settings)
+        self.layout.insertRow(-1, self.baselineMinLabel, self.baselineMin)
         
+        self.baselineMax = QtWidgets.QDoubleSpinBox()
+        self.baselineMax.setMinimum(-10000.0)
+        self.baselineMax.setMaximum(10000.0)
+        if "baselineMax" not in settings.keys():
+            self.baselineMax.setValue(0)
+        else:
+            self.baselineMax.setValue(settings["baselineMax"])
+            
+        self.baselineMaxLabel = LinkedCheckbox("Baseline Max Time", self.baselineMax)
+        self.baselineMaxLabel.buildLinkedCheckbox("baselineMax", self.settings)
+        self.layout.insertRow(-1, self.baselineMaxLabel, self.baselineMax)
+     
         self.baseLayout.addItem(self.layout)
-        #self.baseLayout.addWidget(self.eventIDWidget)
         
         self.setLayout(self.baseLayout)
         
@@ -71,11 +92,24 @@ class Raw2EpochSettings(CustomSettings):
         vars["tmin"] = settings["tminValue"]
         vars["tmax"] = settings["tmaxValue"]
         
+        settings["baselineMin"] = self.baselineMin.value()
+        settings["baselineMax"] = self.baselineMax.value()
+        self.baselineMinLabel.getSettings("baselineMin", vars, settings)
+        self.baselineMaxLabel.getSettings("baselineMax", vars, settings)
+        
+        if self.baselineMinLabel.isChecked():
+            vars["baselineMin"] = self.baselineMin.value()
+        else:
+            vars["baselineMin"] = None
+            
+        if self.baselineMaxLabel.isChecked():    
+            vars["baselineMax"] = self.baselineMax.value()
+        else:
+            vars["baselineMax"] = None
+            
         self.detrendLabel.getSettings("detrend", vars, settings)
         self.verboseLabel.getSettings("verbose", vars, settings)
-        
-        #self.eventIDWidget.getSettings("eventIDs", vars, settings)
-        
+              
         self.parent.settings = settings
         self.parent.variables = vars
 
@@ -99,24 +133,24 @@ class raw2epoch(Node):
         idList = self.global_vars["Event Names"].getVal()
         eventIDs = {}
         for i, id in enumerate(idList):
-            eventIDs[id] = (i+1)*10
+            eventIDs[id[1]] = int(id[0])
         
         print("Converting raw file into epoch data")
-        
+
         # create Epochs object
         Epochs = mne.Epochs(Raw, 
-                            events=self.args["Events"], 
+                            events=self.args["Events"],
+                            preload=True, 
                             event_id = eventIDs,
-                            tmin=-self.parameters["tmin"], 
-                            tmax=self.parameters["tmax"],
                             proj=False, 
                             picks="eeg", 
-                            baseline=(None,None),
+                            baseline=(None, None),
                             reject=None, 
-                            flat=None, 
-                            preload=True, 
+                            flat=None,
                             reject_by_annotation=True,
                             detrend=self.parameters["detrend"], 
-                            verbose=verboseDict[self.parameters["verbose"]])
-  
+                            verbose=verboseDict[self.parameters["verbose"]],
+                            tmin=self.parameters["tmin"], 
+                            tmax=self.parameters["tmax"])
+
         return {"Epoch Data" : Epochs}

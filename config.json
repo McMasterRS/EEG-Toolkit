@@ -15,130 +15,26 @@
             "type"  : "String",
             "value" : "data",
             "const" : false
+        },
+        "Event Names" : {
+            "file": "extensions.globalWidgets",
+            "class": "GlobalTwoColumnListInput",
+            "type"  : "List",
+            "value" : [],
+            "const" : false,
+            "properties" : { "headers" : ["Event ID", "Event name"]}
+        },
+        "Channel Names" : {
+            "file" : "channelNames.py",
+            "class" : "GlobalChannelNames",
+            "toolkit" : "EEG",
+            "type" : "List",
+            "value" : [],
+            "const" : false,
+            "properties" : {}
         }
     },
     "node_types": {
-        "Import Montage File" : {
-            "preset": "node_default",
-            "file": "Input/importEEGData.py",
-            "alternate": true,
-            "category": "Input",
-            "toolkit" : "EEG",
-            "attributes": {
-                "Montage Data": {
-                    "index": -1,
-                    "preset": "attr_preset_1",
-                    "plug": true,
-                    "socket": false,
-                    "type": "montage"
-                }
-            },
-            "settings" : {
-                "settingsFile" : "Input/importEEGData",
-                "settingsClass" : "ImportDataSettings"
-            }
-            
-        },
-        "Import Channel Data" : {
-            "preset": "node_default",
-            "file": "Input/importEEGData.py",
-            "alternate": true,
-            "position": "none",
-            "category": "Input",
-            "toolkit" : "EEG",
-            "attributes": {
-                "Channel Data": {
-                    "index": -1,
-                    "preset": "attr_preset_1",
-                    "plug": true,
-                    "socket": false,
-                    "type": "channelData"
-                }
-            },
-            "settings" : {
-                "settingsFile" : "Input/importEEGData",
-                "settingsClass" : "ImportDataSettings"
-            }
-            
-        },
-        "Import Trigger Data" : {
-            "preset": "node_default",
-            "file": "Input/importEEGData.py",
-            "alternate": true,
-            "position": "none",
-            "category": "Input",
-            "toolkit" : "EEG",
-            "attributes": {
-                "Trigger Data": {
-                    "index": -1,
-                    "preset": "attr_preset_1",
-                    "plug": true,
-                    "socket": false,
-                    "type": "triggerData"
-                }
-            },
-            "settings" : {
-                "settingsFile" : "Input/importEEGData",
-                "settingsClass" : "ImportDataSettings"
-            }
-            
-        },
-        "Import Data Old": {
-            "preset": "node_default",
-            "file": "Input/importDataOld.py",
-            "alternate": true,
-            "position": "none",
-            "category": "Input",
-            "toolkit" : "EEG",
-            "attributes": {
-                "Raw": {
-                    "index": -1,
-                    "preset": "attr_preset_1",
-                    "plug": true,
-                    "socket": false,
-                    "type": "rawEEG"
-                },
-                "Events": {
-                    "index": -1,
-                    "preset": "attr_preset_1",
-                    "plug": true,
-                    "socket": false,
-                    "type": "events"
-                }
-            },
-            "settings" : {  
-                "file" : {
-                    "text" : "File",
-                    "type" : "loadbox",
-                    "params" : {
-                        "text" : ""
-                    }
-                },
-                "montageData" : {
-                    "text" : "Montage File",
-                    "type" : "loadbox",
-                    "params" : {
-                        "text" : ""
-                    }
-                },
-                "channelTypes" : {
-                    "text" : "Channel Type File",
-                    "type" : "loadbox",
-                    "params" : {
-                        "text" : ""
-                    }
-                },
-                "sfreq" : {
-                    "text" : "Sampling Frequency",
-                    "type" : "spinbox",
-                    "params" : {
-                        "minimum" : 0,
-                        "maximum" : 2147483647,
-                        "value" : 100
-                    }
-                }
-            }
-        },
         "Import Data": {
             "preset": "node_default",
             "file": "Input/importEEGData.py",
@@ -294,6 +190,34 @@
                 "settingsClass" : "FilterSettings"
             }
         },
+        "Re-reference" : {
+            "preset" : "node_default",
+            "file" : "Processing/rereference.py",
+            "alternate" : true,
+            "position" : "none",
+            "category" : "Processing",
+            "toolkit" : "EEG",
+            "attributes" : {
+                "Raw": {
+                    "index": -1,
+                    "preset": "attr_preset_1",
+                    "plug": false,
+                    "socket": true,
+                    "type": ["rawEEG"]
+                },
+                "Re-referenced Raw": {
+                    "index": -1,
+                    "preset": "attr_preset_1",
+                    "plug": true,
+                    "socket": false,
+                    "type": "rawEEG"   
+                }
+            },
+            "settings" : {
+                "settingsFile" : "Processing/rereference",
+                "settingsClass" : "RereferenceSettings"
+            }
+        },  
         "Create Evoked" : {
             "preset" : "node_default",
             "file" : "Processing/evoked.py",
@@ -535,6 +459,39 @@
                 "settingsFile" : "AC/eogCorrelationArti",
                 "settingsClass" : "EogCorrelationArtiSettings"
             }
+        },
+        "EOG Rejection" : {
+            "preset" : "node_default",
+            "file" : "AC/eogRejection.py",
+            "alternate" : true,
+            "position" : "none",
+            "category" : "Artifact Correction",
+            "toolkit" : "EEG",
+            "attributes" : {
+                "Raw": {     
+                    "index": -1,
+                    "preset": "attr_preset_1",
+                    "plug": false,
+                    "socket": true,
+                    "type": ["rawEEG"]   
+        
+                },
+                "ICA Solution": {     
+                    "index": -1,
+                    "preset": "attr_preset_1",
+                    "plug": false,
+                    "socket": true,
+                    "type": ["ICA"]   
+                },
+                "Corrected ICA": {     
+                    "index": -1,
+                    "preset": "attr_preset_1",
+                    "plug": true,
+                    "socket": false,
+                    "type": "ICA"  
+                }
+            },
+            "settings" : {}
         },
         "Save Epochs" : {
             "preset" : "node_default",

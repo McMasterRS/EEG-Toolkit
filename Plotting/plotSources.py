@@ -1,6 +1,7 @@
 from pipeline.Node import Node
 import mne
 import pickle
+import tempfile
 import matplotlib.pyplot as plt
 
 class plotSources(Node):
@@ -25,13 +26,14 @@ class plotSources(Node):
                 
             type = f.split(".")[-1]
             if type == "png":
-                fig.savefig(f, format = "png")
+                fig.savefig(f, dpi = 300, format = "png")
             elif type == "pdf":
                 fig.savefig(f, format = "pdf")
             elif type == "pkl":
                 pickle.dump(fig, open(f, "wb"))
                     
         if self.parameters["showGraph"] == True:
-            fig.show()
-        else:
-            plt.close(fig)
+            with tempfile.NamedTemporaryFile(dir='./wariotmp/plots/', delete=False) as temp:
+                    pickle.dump(fig, open(temp.name, 'wb'))
+                    
+        plt.close(fig)

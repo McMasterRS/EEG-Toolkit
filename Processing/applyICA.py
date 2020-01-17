@@ -13,9 +13,7 @@ class applyICA(Node):
         exclude = None
         if "Excluded Channels" in self.args.keys():
             exclude = self.args["Excluded Channels"]
-        
-            
-    
+ 
         # Make compatable with both epochs/raw
     
         correctedEpochs = solution.apply(inst = epochs,

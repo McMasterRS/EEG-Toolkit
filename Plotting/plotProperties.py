@@ -1,6 +1,7 @@
 from pipeline.Node import Node
 import mne
 import pickle
+import tempfile
 from extensions.customSettings import CustomSettings
 from extensions.customWidgets import GlobalSaveTabs, saveWidget
 import matplotlib.pyplot as plt
@@ -90,7 +91,7 @@ class plotProperties(Node):
                 type = f.split(".")[-1]
                 f = name + "_" +  str(i) + "." + type
                 if type == "png":
-                    fig.savefig(f, format = "png")
+                    fig.savefig(f, dpi = 300, format = "png")
                 elif type == "pdf":
                     fig.savefig(f, format = "pdf")
                 elif type == "pkl":
@@ -98,8 +99,11 @@ class plotProperties(Node):
                     
         if self.parameters["showGraph"] == True:
             for fig in figs:
-                fig.show()
-        else:
-            for fig in figs:
-                plt.close(fig)
+                with tempfile.NamedTemporaryFile(dir='./wariotmp/plots/', delete=False) as temp:
+                    pickle.dump(fig, open(temp.name, 'wb'))
+                    
+        for fig in figs:
+            plt.close(fig)
+                
+        
             

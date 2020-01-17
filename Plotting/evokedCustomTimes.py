@@ -7,6 +7,9 @@ import matplotlib.pyplot as plt
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
 
+import pickle
+import tempfile
+
 class evokedCustomTimes(Node):
 
     def __init__(self, name, params):
@@ -31,15 +34,16 @@ class evokedCustomTimes(Node):
                 name = f.split(".")[0]
                 f = name + "_{0}.".format(i) + type
                 if type == "png":
-                    fig.savefig(f, format = "png")
+                    fig.savefig(f, dpi = 300, format = "png")
                 elif type == "pdf":
                     fig.savefig(f, format = "pdf")
                 elif type == "pkl":
                     pickle.dump(fig, open(f, "wb"))
                     
             if self.parameters["showGraph"] == True:
-                fig.show()
-            else:
-                plt.close(fig)
+                with tempfile.NamedTemporaryFile(dir='./wariotmp/imgs/', delete=False) as temp:
+                    fig.savefig(temp.name, dpi = 300, format = "png")
+                    
+            plt.close(fig)
         
         return

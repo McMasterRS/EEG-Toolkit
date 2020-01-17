@@ -4,6 +4,8 @@ from extensions.customSettings import CustomSettings
 import mne
 import numpy as np
 import matplotlib.pyplot as plt
+import pickle
+import tempfile
 
 from extensions.customWidgets import LinkedSpinbox, BatchSavePanel, BatchSaveTab
 
@@ -115,7 +117,7 @@ class batchAvSignal(Node):
                 name = f.split(".")[0]
                 f = name + "_{0}.".format(eventNames[i]) + type
                 if type == "png":
-                    fig.savefig(f, format = "png")
+                    fig.savefig(f, dpi = 300, format = "png")
                 elif type == "pdf":
                     fig.savefig(f, format = "pdf")
                 elif type == "pkl":
@@ -123,8 +125,9 @@ class batchAvSignal(Node):
             
             # Show graphs if toggled, close if not
             if self.parameters["toggleShowGraph"]:
-                fig.show()
-            else:
-                plt.close(fig)
+                with tempfile.NamedTemporaryFile(dir='./wariotmp/plots/', delete=False) as temp:
+                    pickle.dump(fig, open(temp.name, 'wb'))
+                    
+            plt.close(fig)
         
         return

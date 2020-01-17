@@ -111,6 +111,8 @@ class NumpyImport(QtWidgets.QWidget):
         
         lb = QtWidgets.QLabel("Montage File")
         self.montageLoad = loadWidget(self)
+        if "montage" in settings.keys():
+            self.montageLoad.textbox.setText(settings["montage"])
         self.montageLoad.loadSettings(settings)
         formLayout.insertRow(-1, lb, self.montageLoad)
         
@@ -136,15 +138,15 @@ class NumpyImport(QtWidgets.QWidget):
         
     def genSettings(self, settings, vars):
         
-        self.fileSelect.genSettings(settings, vars)
+        self.fileSelectWindow.genSettings(settings, vars)
         
         settings["montage"] = self.montageLoad.textbox.text()
         settings["chanTypes"] = self.chanTypesLoad.textbox.text()
-        settings["sfreq"] = self.sbFreq.currentValue()
+        settings["sfreq"] = self.sbFreq.value()
         
         vars["montageFile"] = self.montageLoad.textbox.text()
         vars["channelTypes"] = self.chanTypesLoad.textbox.text()
-        vars["sfreq"] = self.sbFreq.currentValue()
+        vars["sfreq"] = self.sbFreq.value()
         
 class ImportDataSettings(CustomSettings):
     def __init__(self, parent, settings):
@@ -155,10 +157,20 @@ class ImportDataSettings(CustomSettings):
         self.layout = QtWidgets.QVBoxLayout()
         
         self.tabWindow = QtWidgets.QTabWidget()
-        self.BDF = BdfImport(settings)
-        self.numpy = NumpyImport(settings)
+        
+        if settings["currentTab"] == 0:
+            self.BDF = BdfImport(settings)
+        else:
+            self.BDF = BdfImport({})
+            
+        if settings["currentTab"] == 1:
+            self.numpy = NumpyImport(settings)
+        else:
+            self.numpy = NumpyImport({})
+            
         self.tabWindow.addTab(self.BDF, "BDF Files")
         self.tabWindow.addTab(self.numpy, "Numpy Files")
+        self.tabWindow.setCurrentIndex(settings["currentTab"])
             
         self.cbFolders = QtWidgets.QCheckBox("Create folder for each input file")
         if "makeFolders" in settings.keys():
@@ -180,7 +192,10 @@ class ImportDataSettings(CustomSettings):
         settings["currentTab"] = self.tabWindow.currentIndex()
         vars["dataType"] = self.tabWindow.tabText(self.tabWindow.currentIndex())
         
-        self.BDF.genSettings(settings, vars)
+        if vars["dataType"] == "BDF Files":
+            self.BDF.genSettings(settings, vars)
+        if vars["dataType"] == "Numpy Files":
+            self.numpy.genSettings(settings, vars)
         
         settings["makeFolders"] = self.cbFolders.isChecked()
         vars["makeFolders"] = self.cbFolders.isChecked()
@@ -193,7 +208,7 @@ class importEEGData(Node):
     def __init__(self, name, params = None):
         super(importEEGData, self).__init__(name, params)
         
-        assert(self.parameters["file"] is not ""), "ERROR: Import Data node has no input files set. Please update the node's settings and re-run"
+        assert(self.parameters["files"] is not ""), "ERROR: Import Data node has no input files set. Please update the node's settings and re-run"
         assert(self.parameters["montageFile"] is not ""), "ERROR: Import Data node has no montage file set. Please update the node's settings and re-run"
         
         if self.parameters["dataType"] == "Numpy Files":
@@ -223,10 +238,11 @@ class importEEGData(Node):
             
         # Numpy file import
         if self.parameters["dataType"] == "Numpy Files":
+            data = np.load(currentFile)
             sfreq = self.parameters["sfreq"]
         
             trigTimes = data["SampleTime"][data["TriggerTime"] != 0.][:13] ## FIXME
-            trigData = [data["TriggerValues"], trigTimes]
+            trigData = data["TriggerValues"]
             
             # Need to split up the path name for the montage file
             montageFile = self.parameters["montageFile"]
@@ -246,9 +262,11 @@ class importEEGData(Node):
             raw.set_eeg_reference('average',projection=False)   
             
                     # MNE needs trigger data in a certain format
-            events = np.concatenate((np.expand_dims(T*sfreq,axis=1),
-                                           np.zeros((T.shape[0],1)),
-                                           np.expand_dims(Y,axis=1)),axis=1).astype(int)
+            events = np.concatenate((np.expand_dims(trigTimes*sfreq,axis=1),
+                                           np.zeros((trigTimes.shape[0],1)),
+                                           np.expand_dims(trigData,axis=1)),axis=1).astype(int)
+                                           
+            data = raw
                                            
         # Update the global filename variable with each new file
         # Useful for batch jobs where you want each dataset to output results with matching names     

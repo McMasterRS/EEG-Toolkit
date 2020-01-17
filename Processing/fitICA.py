@@ -154,6 +154,7 @@ class fitICA(Node):
     def __init__(self, name, params):
         super(fitICA, self).__init__(name, params)
         
+        # Convert parameters set to None from text to Nonetype
         if self.parameters["skew"] == "None":
             self.parameters["skew"] = None
             
