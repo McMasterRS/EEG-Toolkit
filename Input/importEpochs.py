@@ -1,6 +1,6 @@
-from pipeline.Node import Node
-from extensions.customSettings import CustomSettings
-from extensions.customWidgets import loadWidget
+from wario import Node
+from wario.CustomSettings import CustomSettings
+from wario.CustomWidgets import loadWidget
 from PyQt5 import QtWidgets
 import mne
 

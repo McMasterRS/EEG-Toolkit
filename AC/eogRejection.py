@@ -1,4 +1,4 @@
-from pipeline.Node import Node
+from wario import Node
 import mne
 
 class eogRejection(Node):

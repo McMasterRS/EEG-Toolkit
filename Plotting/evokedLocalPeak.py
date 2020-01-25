@@ -1,6 +1,6 @@
-from pipeline.Node import Node
-from extensions.customSettings import CustomSettings
-from extensions.customWidgets import BatchSaveTab
+from wario import Node
+from wario.CustomSettings import CustomSettings
+from wario.CustomWidgets import BatchSaveTab
 import mne
 import numpy as np
 import matplotlib.pyplot as plt

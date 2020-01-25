@@ -1,11 +1,11 @@
-from pipeline.Node import Node
+from wario import Node
 import mne 
 import numpy as np
 import os, sys
 import matplotlib.pyplot as plt
 
-from extensions.customSettings import CustomSettings
-from extensions.customWidgets import loadWidget, LinkedCheckbox
+from wario.CustomSettings import CustomSettings
+from wario.CustomWidgets import loadWidget, LinkedCheckbox
 
 from PyQt5 import QtWidgets, QtCore, QtGui
 
@@ -81,6 +81,7 @@ class BdfImport(QtWidgets.QWidget):
         
         self.maskSpinbox = QtWidgets.QSpinBox()
         self.maskSpinbox.setMaximum(2**24)
+        self.maskSpinbox.setValue(255)
         self.maskEnable = LinkedCheckbox("Event mask", self.maskSpinbox)
         self.maskEnable.buildLinkedCheckbox("mask", settings)
         formLayout.insertRow(-1, self.maskEnable, self.maskSpinbox)

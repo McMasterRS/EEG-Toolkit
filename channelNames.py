@@ -1,4 +1,4 @@
-from extensions.globalWidgets import GlobalWindowWidget
+from wario.GlobalWidgets import GlobalWindowWidget
 from PyQt5 import QtWidgets
 import numpy as np
 import os

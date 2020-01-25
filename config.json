@@ -1,23 +1,23 @@
 {   
     "name" : "EEG",
-    "docs" : "./docs/build/html",
+    "docs" : "docs/build/html/",
     "global_variables":{
         "Output Folder" : {
-            "file": "extensions.globalWidgets",
+            "file": "wario.GlobalWidgets",
             "class": "GlobalFolderSelect",
             "type"  : "String",
             "value" : "./",
             "const" : false
         },
         "Output Filename" : {
-            "file": "extensions.globalWidgets",
+            "file": "wario.GlobalWidgets",
             "class": "GlobalTextbox",
             "type"  : "String",
             "value" : "data",
             "const" : false
         },
         "Event Names" : {
-            "file": "extensions.globalWidgets",
+            "file": "wario.GlobalWidgets",
             "class": "GlobalTwoColumnListInput",
             "type"  : "List",
             "value" : [],

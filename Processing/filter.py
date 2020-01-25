@@ -1,7 +1,7 @@
-from pipeline.Node import Node
+from wario import Node
 import mne 
 import numpy as np
-from extensions.customSettings import CustomSettings
+from wario import CustomSettings
 from PyQt5 import QtWidgets, QtCore, QtGui
 
 class FilterSettings(CustomSettings):

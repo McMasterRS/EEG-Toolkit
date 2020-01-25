@@ -1,9 +1,9 @@
-from pipeline.Node import Node
+from wario import Node
 import mne
 import pickle
 import tempfile
-from extensions.customSettings import CustomSettings
-from extensions.customWidgets import GlobalSaveTabs, saveWidget
+from wario.CustomSettings import CustomSettings
+from wario.CustomWidgets import GlobalSaveTabs, saveWidget
 import matplotlib.pyplot as plt
 
 from PyQt5 import QtWidgets

@@ -1,6 +1,6 @@
-from pipeline.Node import Node
-from extensions.customSettings import CustomSettings
-from extensions.customWidgets import LinkedCheckbox, ExpandingTable
+from wario import Node
+from wario import CustomSettings
+from wario.CustomWidgets import LinkedCheckbox, ExpandingTable
 import mne
 import numpy as np
 

@@ -1,5 +1,6 @@
-from pipeline.Node import Node
+from wario import Node
 from extensions.customSettings import CustomSettings
+from extensions.customWidgets import ExpandingTable
 import mne
 from PyQt5 import QtWidgets
 
@@ -8,12 +9,25 @@ class RereferenceSettings(CustomSettings):
         super(RereferenceSettings, self).__init__(parent, settings)
         
     def buildUI(self, settings):
-        self.layout = QtWidgets.QFormLayout()
+        self.layout = QtWidgets.QVBoxLayout()
         
-        lb = QtWidgets.QLabel("Re-Referencing Target")
+        self.table = ExpandingTable("target", settings)
+        self.table.setHorizontalHeaderLabels(["Referencing Target"])
+        self.layout.addWidget(self.table)
+        
+        addLayout = QtWidgets.QHBoxLayout()
+        
+        self.btAdd = QtWidgets.QPushButton("Add")
+        self.btAdd.setSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        self.btAdd.clicked.connect(self.addRow)
+        addLayout.addWidget(self.btAdd)
+        
         self.cbTypes = QtWidgets.QComboBox()
         self.cbTypes.addItems(["Average"])
-        self.layout.addRow(lb, self.cbTypes)
+        addLayout.addWidget(self.cbTypes)
+        
+        addLayout.setSpacing(5)
+        self.layout.addItem(addLayout)
         
         # Holds the selected channel so that the first global update can select it
         self.channelHold = ""
@@ -22,6 +36,9 @@ class RereferenceSettings(CustomSettings):
 
         self.setLayout(self.layout)
         
+    def addRow(self):
+        self.table.setItem(self.table.rowCount() - 1, 0, QtWidgets.QTableWidgetItem(self.cbTypes.currentText()))
+        
     def genSettings(self):
         settings = {}
         vars = {}
@@ -29,8 +46,7 @@ class RereferenceSettings(CustomSettings):
         settings["settingsFile"] = self.settings["settingsFile"]
         settings["settingsClass"] = self.settings["settingsClass"]
         
-        settings["reference"] = self.cbTypes.currentText()
-        vars["reference"] = self.cbTypes.currentText()
+        self.table.getSettings("target", vars, settings)
         
         self.parent.settings = settings
         self.parent.variables = vars
@@ -70,11 +86,12 @@ class rereference(Node):
     def process(self):
         data = self.args["Raw"]
         
-        if self.parameters["reference"] == "Average":
+        reference = list(self.parameters["target"].keys())
+        print(reference)
+        if reference == ["Average"]:
             reference = "average"
             data.set_eeg_reference('average', projection=False)
         else:
-            reference = [self.parameters["reference"]]
             data, _ = mne.set_eeg_reference(data, reference)
         
         return {"Re-referenced Raw" : data}   

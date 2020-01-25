@@ -1,6 +1,6 @@
-from pipeline.Node import Node
-from extensions.customSettings import CustomSettings
-from extensions.customWidgets import LinkedCheckbox, LinkedSpinbox
+from wario import Node
+from wario import CustomSettings
+from wario.CustomWidgets import LinkedCheckbox, LinkedSpinbox
 import mne
 
 from PyQt5 import QtWidgets, QtCore, QtGui

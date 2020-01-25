@@ -1,6 +1,6 @@
-from pipeline.Node import Node
-from extensions.customSettings import CustomSettings
-from extensions.customWidgets import GlobalSaveTabs
+from wario import Node
+from wario.CustomSettings import CustomSettings
+from wario.CustomWidgets import GlobalSaveTabs
 import mne
 
 from PyQt5 import QtWidgets

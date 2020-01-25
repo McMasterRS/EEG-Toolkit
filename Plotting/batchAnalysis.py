@@ -1,5 +1,5 @@
-from pipeline.Node import Node
-from extensions.customSettings import CustomSettings
+from wario import Node
+from wario.CustomSettings import CustomSettings
 
 import mne
 import numpy as np
@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import pickle
 import tempfile
 
-from extensions.customWidgets import LinkedSpinbox, BatchSavePanel, BatchSaveTab
+from wario.CustomWidgets import LinkedSpinbox, BatchSavePanel, BatchSaveTab
 
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore

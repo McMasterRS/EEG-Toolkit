@@ -1,5 +1,5 @@
-from pipeline.Node import Node
-from extensions.customSettings import CustomSettings
+from wario import Node
+from wario.CustomSettings import CustomSettings
 import mne
 import matplotlib.pyplot as plt
 import pickle
