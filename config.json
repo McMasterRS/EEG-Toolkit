@@ -514,6 +514,27 @@
                 "settingsClass" : "SaveEpochSettings"
             }
         },
+        "Save Raw" : {
+            "preset" : "node_default",
+            "file" : "Output/saveRaw.py",
+            "alternate" : true,
+            "position" : "none",
+            "category" : "Output",
+            "toolkit" : "EEG",
+            "attributes" : {
+                "Raw": {     
+                    "index": -1,
+                    "preset": "attr_preset_1",
+                    "plug": false,
+                    "socket": true,
+                    "type": ["rawEEG"]   
+                }
+            },
+            "settings" : {
+                "settingsFile" : "Output/saveEpochs",
+                "settingsClass" : "SaveEpochSettings"
+            }
+        },
         "Save Evoked" : {   
             "preset" : "node_default",
             "file" : "Output/saveEvoked.py",
@@ -554,6 +575,27 @@
             "settings" : {
                 "settingsFile" : "Output/saveEpochs",
                 "settingsClass" : "SaveEpochSettings"
+            }
+        },
+        "Plot Raw" : {
+            "preset" : "node_default",
+            "file" : "Plotting/plotRaw.py",
+            "alternate" : true,
+            "position" : "none",
+            "category" : "Plotting",
+            "toolkit" : "EEG",
+            "attributes" : {
+                "Raw": {     
+                    "index": -1,
+                    "preset": "attr_preset_1",
+                    "plug": false,
+                    "socket": true,
+                    "type": ["rawEEG"]   
+                }
+            },
+            "settings" : {
+                "settingsFile" : "Plotting/plotProperties",
+                "settingsClass" : "PlotSettings"
             }
         },
         "Plot Sources" : {

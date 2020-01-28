@@ -40,11 +40,14 @@ class evoked(Node):
     def process(self):
         epochs = self.args["Epoch Data"]
         
-        eventIDs = [str(i[1]) for i in self.global_vars["Event Names"].getVal()]
-        
+        idList = self.global_vars["Event Names"].getVal()
+        eventIDs = {}
+        for i, id in enumerate(idList):
+            eventIDs[id[1]] = int(id[0])
+            
         # create Evoked object
         evoked = [epochs[name].average() for name in eventIDs]
         for i, name in enumerate(eventIDs):
-            evoked[i].comment = name[1]
+            evoked[i].comment = name
         
         return {"Evoked Data" : evoked}
