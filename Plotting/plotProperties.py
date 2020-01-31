@@ -100,7 +100,8 @@ class plotProperties(Node):
         if self.parameters["showGraph"] == True:
             for fig in figs:
                 with tempfile.NamedTemporaryFile(dir='./wariotmp/plots/', delete=False) as temp:
-                    pickle.dump(fig, open(temp.name, 'wb'))
+                    data = {"type" : "show", "data" : fig}
+                    pickle.dump(data, open(temp.name, 'wb'))
                     
         for fig in figs:
             plt.close(fig)

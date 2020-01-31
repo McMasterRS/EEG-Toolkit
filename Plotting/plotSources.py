@@ -34,6 +34,7 @@ class plotSources(Node):
                     
         if self.parameters["showGraph"] == True:
             with tempfile.NamedTemporaryFile(dir='./wariotmp/plots/', delete=False) as temp:
-                    pickle.dump(fig, open(temp.name, 'wb'))
+                data = {"type" : "sources", "data" : inst, 'ica' : ica.copy()}
+                pickle.dump(data, open(temp.name, 'wb'))
                     
         plt.close(fig)

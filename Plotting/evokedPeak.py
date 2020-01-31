@@ -38,8 +38,9 @@ class evokedPeak(Node):
                     pickle.dump(fig, open(f, "wb"))
             
             if self.parameters["showGraph"] == True:
-                with tempfile.NamedTemporaryFile(dir='./wariotmp/imgs/', delete=False) as temp:
-                    fig.savefig(temp.name, dpi = 300, format = "png")
+                with tempfile.NamedTemporaryFile(dir='./wariotmp/plots/', delete=False) as temp:
+                    data = {"type" : "peak", "data" : evoked}
+                    pickle.dump(data, open(temp.name, 'wb'))
                     
             plt.close(fig)
             

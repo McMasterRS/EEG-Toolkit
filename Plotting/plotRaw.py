@@ -33,6 +33,7 @@ class plotRaw(Node):
                     
         if self.parameters["showGraph"] == True:
             with tempfile.NamedTemporaryFile(dir='./wariotmp/plots/', delete=False) as temp:
-                    pickle.dump(fig, open(temp.name, 'wb'))
+                    data = {"data" : raw, "type" : "raw"}
+                    pickle.dump(data, open(temp.name, 'wb'))
                     
         plt.close(fig)

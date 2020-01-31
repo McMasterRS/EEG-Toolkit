@@ -1,6 +1,6 @@
 from wario import Node
-from extensions.customSettings import CustomSettings
-from extensions.customWidgets import ExpandingTable
+from wario.CustomSettings import CustomSettings
+from wario.CustomWidgets import ExpandingTable
 import mne
 from PyQt5 import QtWidgets
 

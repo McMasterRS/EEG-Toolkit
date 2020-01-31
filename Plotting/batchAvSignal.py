@@ -126,7 +126,8 @@ class batchAvSignal(Node):
             # Show graphs if toggled, close if not
             if self.parameters["toggleShowGraph"]:
                 with tempfile.NamedTemporaryFile(dir='./wariotmp/plots/', delete=False) as temp:
-                    pickle.dump(fig, open(temp.name, 'wb'))
+                    data = {"type" : "show", "data" : fig}
+                    pickle.dump(data, open(temp.name, 'wb'))
                     
             plt.close(fig)
         
