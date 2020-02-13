@@ -98,7 +98,7 @@ class FitICASettings(CustomSettings):
         self.stopWidget = LinkedSpinbox()
         self.stopLabel = LinkedCheckbox("Stop", self.stopWidget)
         self.stopLabel.buildLinkedCheckbox("stop", self.settings)
-        self.stopWidget.setMaximum(10**12)
+        self.stopWidget.setMaximum(10**6)
         self.layout.insertRow(-1, self.stopLabel, self.stopWidget)
         
         # Link start and stop

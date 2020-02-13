@@ -755,8 +755,8 @@
                 }
             },
             "settings" : {
-                "settingsFile" : "Plotting/evokedLocalPeak",
-                "settingsClass" : "EvokedLocalPeakSettings"
+                "settingsFile" : "Plotting/plotProperties",
+                "settingsClass" : "PlotSettings"
             }
         },
         "Batch Peak Analysis" : {

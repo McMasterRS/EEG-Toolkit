@@ -3,6 +3,7 @@ from wario.CustomSettings import CustomSettings
 import mne
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
@@ -37,12 +38,8 @@ class evokedPeak(Node):
                 elif type == "pkl":
                     pickle.dump(fig, open(f, "wb"))
             
-            if self.parameters["showGraph"] == True:
-                with tempfile.NamedTemporaryFile(dir='./wariotmp/plots/', delete=False) as temp:
-                    data = {"type" : "peak", "data" : evoked}
-                    pickle.dump(data, open(temp.name, 'wb'))
+            data = {"type" : "peak", "data" : evoked}
+            name = os.path.join(".", "wariotmp", self.global_vars["Output Filename"].split("\\")[0], self.node_id + "." + evoked.comment)
+            pickle.dump(data, open(name, 'wb'))
                     
             plt.close(fig)
-            
-        
-        return

@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pickle
 import tempfile
+import os
 
 from wario.CustomWidgets import LinkedSpinbox, BatchSavePanel, BatchSaveTab
 
@@ -49,8 +50,8 @@ class BatchAnalysisSettings(CustomSettings):
         self.stdSave = BatchSaveTab("Std", "graph", settings)
         
         self.tabs.addTab(self.dataSave, "Data Settings")
-        self.tabs.addTab(self.meanSave, "Mean Plot Settings")
-        self.tabs.addTab(self.stdSave, "σ Plot Settings")
+        self.tabs.addTab(self.meanSave, "Latency Plot Settings")
+        self.tabs.addTab(self.stdSave, "Amplitude Plot Settings")
         
         self.layout.addWidget(self.tabs)
         
@@ -169,11 +170,6 @@ class batchAnalysis(Node):
                 fig.savefig(f, format = "pdf")
             elif type == "pkl":
                 pickle.dump(fig, open(f, "wb"))
-        
-        if self.parameters["toggleShowMean"]:
-            with tempfile.NamedTemporaryFile(dir='./wariotmp/plots/', delete=False) as temp:
-                    data = {"type" : "show", "data" : fig}
-                    pickle.dump(data, open(temp.name, 'wb'))
                     
         plt.close(fig)
             
@@ -203,11 +199,17 @@ class batchAnalysis(Node):
                 fig2.savefig(f, format = "pdf")
             elif type == "pkl":
                 pickle.dump(fig2, open(f, "wb"))
-                
-        if self.parameters["toggleShowStd"]:
-            with tempfile.NamedTemporaryFile(dir='./wariotmp/plots/', delete=False) as temp:
-                    data = {"type" : "show", "data" : fig2}
-                    pickle.dump(data, open(temp.name, 'wb'))
+            
+        d = {"meanLat" : meanLatencies.transpose(2, 0, 1)[0],
+             "meanAmp" : meanAmplitudes.transpose(2, 0, 1)[0],
+             "stdLat"  : stdevLatencies.transpose(2, 0, 1)[0],
+             "stdAmp"  : stdevAmplitudes.transpose(2, 0, 1)[0],
+             "chNames" : self.chanNames,
+             "evNames" : self.eventNames}
+            
+        data = {"type" : "batchAnalysis", "data" : d}
+        name = os.path.join(".", "wariotmp", "Analysis")
+        pickle.dump(data, open(name, 'wb'))
                     
         plt.close(fig2)
             

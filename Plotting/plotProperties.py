@@ -2,6 +2,7 @@ from wario import Node
 import mne
 import pickle
 import tempfile
+import os
 from wario.CustomSettings import CustomSettings
 from wario.CustomWidgets import GlobalSaveTabs, saveWidget
 import matplotlib.pyplot as plt
@@ -97,11 +98,10 @@ class plotProperties(Node):
                 elif type == "pkl":
                     pickle.dump(fig, open(f, "wb"))
                     
-        if self.parameters["showGraph"] == True:
-            for fig in figs:
-                with tempfile.NamedTemporaryFile(dir='./wariotmp/plots/', delete=False) as temp:
-                    data = {"type" : "show", "data" : fig}
-                    pickle.dump(data, open(temp.name, 'wb'))
+
+        data = {"type" : "showMulti", "data" : figs}
+        name = os.path.join(".", "wariotmp", self.global_vars["Output Filename"].split("\\")[0], self.node_id)
+        pickle.dump(data, open(name, 'wb'))
                     
         for fig in figs:
             plt.close(fig)

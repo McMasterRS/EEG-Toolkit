@@ -280,6 +280,8 @@ class importEEGData(Node):
             if not os.path.isdir(dir):
                 os.mkdir(dir)
                 
+            os.mkdir(os.path.join("wariotmp", self.global_vars["Output Filename"].split("\\")[0]))
+                
         self.parameters["files"].pop(0)
         self.done = not len(self.parameters["files"]) > 0
                 

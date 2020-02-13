@@ -3,6 +3,7 @@ import mne
 import pickle
 import tempfile
 import matplotlib.pyplot as plt
+import os
 
 class plotSources(Node):
     def __init__(self, name, params):
@@ -32,9 +33,8 @@ class plotSources(Node):
             elif type == "pkl":
                 pickle.dump(fig, open(f, "wb"))
                     
-        if self.parameters["showGraph"] == True:
-            with tempfile.NamedTemporaryFile(dir='./wariotmp/plots/', delete=False) as temp:
-                data = {"type" : "sources", "data" : inst, 'ica' : ica.copy()}
-                pickle.dump(data, open(temp.name, 'wb'))
+        data = {"type" : "sources", "data" : inst, 'ica' : ica.copy()}
+        name = os.path.join(".", "wariotmp", self.global_vars["Output Filename"].split("\\")[0], self.node_id)
+        pickle.dump(data, open(name, 'wb'))
                     
         plt.close(fig)

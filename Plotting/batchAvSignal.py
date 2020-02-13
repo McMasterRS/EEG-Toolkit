@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pickle
 import tempfile
+import os
 
 from wario.CustomWidgets import LinkedSpinbox, BatchSavePanel, BatchSaveTab
 
@@ -123,11 +124,10 @@ class batchAvSignal(Node):
                 elif type == "pkl":
                     pickle.dump(fig, open(f, "wb"))
             
-            # Show graphs if toggled, close if not
-            if self.parameters["toggleShowGraph"]:
-                with tempfile.NamedTemporaryFile(dir='./wariotmp/plots/', delete=False) as temp:
-                    data = {"type" : "show", "data" : fig}
-                    pickle.dump(data, open(temp.name, 'wb'))
+
+            data = {"type" : "show", "data" : fig}
+            name = os.path.join(".", "wariotmp", "Average Signal " + self.evokedArrays[0][i].comment)
+            pickle.dump(data, open(name, 'wb'))
                     
             plt.close(fig)
         

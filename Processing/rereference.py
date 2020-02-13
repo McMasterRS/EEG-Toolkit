@@ -87,7 +87,6 @@ class rereference(Node):
         data = self.args["Raw"]
         
         reference = list(self.parameters["target"].keys())
-        print(reference)
         if reference == ["Average"]:
             reference = "average"
             data.set_eeg_reference('average', projection=False)

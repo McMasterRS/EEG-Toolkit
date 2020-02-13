@@ -3,6 +3,7 @@ import mne
 import pickle
 import tempfile
 import matplotlib.pyplot as plt
+import os
 
 class plotRaw(Node):
     def __init__(self, name, params):
@@ -31,9 +32,8 @@ class plotRaw(Node):
             elif type == "pkl":
                 pickle.dump(fig, open(f, "wb"))
                     
-        if self.parameters["showGraph"] == True:
-            with tempfile.NamedTemporaryFile(dir='./wariotmp/plots/', delete=False) as temp:
-                    data = {"data" : raw, "type" : "raw"}
-                    pickle.dump(data, open(temp.name, 'wb'))
+        data = {"data" : raw, "type" : "raw"}
+        name = os.path.join(".", "wariotmp", self.global_vars["Output Filename"].split("\\")[0], self.node_id)
+        pickle.dump(data, open(name, 'wb'))
                     
         plt.close(fig)
