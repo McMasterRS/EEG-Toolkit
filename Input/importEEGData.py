@@ -1,4 +1,4 @@
- from wario import Node
+from wario import Node
 import mne 
 import numpy as np
 import os, sys
