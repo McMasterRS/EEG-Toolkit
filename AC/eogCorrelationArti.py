@@ -1,5 +1,5 @@
 from wario import Node
-from extensions.customSettings import CustomSettings
+from wario.customSettings import CustomSettings
 import mne
 
 from PyQt5 import QtWidgets, QtCore, QtGui

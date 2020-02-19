@@ -1,7 +1,6 @@
 from wario import Node
 import mne
 
-
 class eegCorrelationArti(Node):
     def __init__(self, name, params):
         super(eegCorrelationArti, self).__init__(name, params)
