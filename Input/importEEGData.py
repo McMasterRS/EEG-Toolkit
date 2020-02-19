@@ -177,7 +177,8 @@ class ImportDataSettings(CustomSettings):
             
         self.tabWindow.addTab(self.BDF, "BDF Files")
         self.tabWindow.addTab(self.numpy, "Numpy Files")
-        self.tabWindow.setCurrentIndex(settings["currentTab"])
+        if "currentTab" in settings.keys():
+            self.tabWindow.setCurrentIndex(settings["currentTab"])
             
         self.cbFolders = QtWidgets.QCheckBox("Create folder for each input file")
         if "makeFolders" in settings.keys():
