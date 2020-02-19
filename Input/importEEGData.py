@@ -1,4 +1,4 @@
-from wario import Node
+ from wario import Node
 import mne 
 import numpy as np
 import os, sys
@@ -159,14 +159,20 @@ class ImportDataSettings(CustomSettings):
         
         self.tabWindow = QtWidgets.QTabWidget()
         
-        if settings["currentTab"] == 0:
-            self.BDF = BdfImport(settings)
+        if "currentTab" in settings.keys():
+        
+            if settings["currentTab"] == 0:
+                self.BDF = BdfImport(settings)
+            else:
+                self.BDF = BdfImport({})
+                
+            if settings["currentTab"] == 1:
+                self.numpy = NumpyImport(settings)
+            else:
+                self.numpy = NumpyImport({})
+                
         else:
             self.BDF = BdfImport({})
-            
-        if settings["currentTab"] == 1:
-            self.numpy = NumpyImport(settings)
-        else:
             self.numpy = NumpyImport({})
             
         self.tabWindow.addTab(self.BDF, "BDF Files")
