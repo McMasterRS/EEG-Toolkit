@@ -68,5 +68,10 @@ class GlobalChannelNames(GlobalWindowWidget):
 
             data = mne.channels.read_montage(kind = filename, path = filePath)
             
+        else:
+            error_dialog = QtWidgets.QErrorMessage()
+            error_dialog.showMessage('Invalid file selected')
+            return
+            
         self.channelNames = data.ch_names
         

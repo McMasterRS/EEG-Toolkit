@@ -8,6 +8,7 @@ from wario.CustomSettings import CustomSettings
 from wario.CustomWidgets import loadWidget, LinkedCheckbox
 
 from PyQt5 import QtWidgets, QtCore, QtGui
+from blinker import signal
 
 class FileSelectWindow(QtWidgets.QWidget):
     def __init__(self, settings, type):
@@ -157,7 +158,17 @@ class ImportDataSettings(CustomSettings):
     def buildUI(self, settings):
         self.layout = QtWidgets.QVBoxLayout()
         
-        self.tabWindow = QtWidgets.QTabWidget()
+        typeLayout = QtWidgets.QHBoxLayout()
+        lb = QtWidgets.QLabel("Data Type: ")
+        
+        self.cbType = QtWidgets.QComboBox()
+        self.cbType.addItems(["BDF Files", "Numpy Files"])
+        self.cbType.setSizePolicy(QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed))
+        
+        self.widgetStack = QtWidgets.QStackedWidget(self)
+
+        typeLayout.addWidget(lb)
+        typeLayout.addWidget(self.cbType)
         
         if "currentTab" in settings.keys():
         
@@ -175,10 +186,13 @@ class ImportDataSettings(CustomSettings):
             self.BDF = BdfImport({})
             self.numpy = NumpyImport({})
             
-        self.tabWindow.addTab(self.BDF, "BDF Files")
-        self.tabWindow.addTab(self.numpy, "Numpy Files")
+        self.widgetStack.addWidget(self.BDF)
+        self.widgetStack.addWidget(self.numpy)
+        self.cbType.currentIndexChanged.connect(self.swapTab)
+        
         if "currentTab" in settings.keys():
-            self.tabWindow.setCurrentIndex(settings["currentTab"])
+            self.cbType.setCurrentIndex(settings["currentTab"])
+            self.widgetStack.setCurrentIndex(settings["currentTab"])
             
         self.cbFolders = QtWidgets.QCheckBox("Create folder for each input file")
         if "makeFolders" in settings.keys():
@@ -186,9 +200,13 @@ class ImportDataSettings(CustomSettings):
         else:
             self.cbFolders.setChecked(True)
         
-        self.layout.addWidget(self.tabWindow)
+        self.layout.addItem(typeLayout)
+        self.layout.addWidget(self.widgetStack)
         self.layout.addWidget(self.cbFolders)
         self.setLayout(self.layout)
+        
+    def swapTab(self, i):
+        self.widgetStack.setCurrentIndex(i)
         
     def genSettings(self):
         settings = {}
@@ -197,8 +215,8 @@ class ImportDataSettings(CustomSettings):
         settings["settingsFile"] = self.settings["settingsFile"]
         settings["settingsClass"] = self.settings["settingsClass"]
         
-        settings["currentTab"] = self.tabWindow.currentIndex()
-        vars["dataType"] = self.tabWindow.tabText(self.tabWindow.currentIndex())
+        settings["currentTab"] = self.cbType.currentIndex()
+        vars["dataType"] = self.cbType.currentText()
         
         if vars["dataType"] == "BDF Files":
             self.BDF.genSettings(settings, vars)
@@ -221,6 +239,8 @@ class importEEGData(Node):
         
         if self.parameters["dataType"] == "Numpy Files":
             assert(self.parameters["channelTypes"] is not ""), "ERROR: Import Data node has no channel type file set. Please update the node's settings and re-run"
+            
+        dataCount = signal('eegNodeCount').send('node', count=len(self.parameters["files"]))
             
     def process(self):
 

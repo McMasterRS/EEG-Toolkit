@@ -1,9 +1,7 @@
 from wario import PipelineThread
 
 from PyQt5.QtCore import *
-from PyQt5 import QtWidgets
-from PyQt5 import QtGui
-from PyQt5 import uic
+from PyQt5 import QtWidgets, QtGui, uic
 from blinker import signal
 import sys, os, shutil
 import pickle
@@ -40,21 +38,36 @@ class ThreadHandler(QtWidgets.QWidget):
         # Pipeline running variables
         signal("end").connect(self.finishRun)
         signal("crash").connect(self.updateCrash)
-        self.pipelineComplete.connect(self.showPlots) 
+        self.pipelineComplete.connect(self.showPlots)
         
+        # Progress tracking variables
+        signal('node complete').connect(self.incrimentCount)        
+        signal('eegNodeCount').connect(self.getCount)
+       
         
         uiFile = os.path.join(os.path.dirname(os.path.realpath(__file__)), "eegWindow.ui")
         uic.loadUi(uiFile, self)
         self.treeWidget.itemClicked.connect(self.showPlot)
+        self.progress.setValue(0)
+         
         self.treeItem = {}
         self.walk = {}
         self.currentPlot = None
+        
+        self.nodeCount = 0
+        self.numNodes = 1
+        self.numNodesMultiplyer = 1
         
     def startPipeline(self, file):
     
         self.thread = PipelineThread(file)
         self.walk = WalkTree(file)
+        self.numNodes = len(self.walk.nodes)
         self.treeWidget.clear()
+        
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.updateProgress)
+        self.timer.start(500)
 
         # Build temporary files
         if os.path.exists("./wariotmp"):
@@ -66,6 +79,15 @@ class ThreadHandler(QtWidgets.QWidget):
         self.lbStatus.setText("Running")
         self.updatePalette("#0000FF")
         self.thread.start()
+        
+    def getCount(self, sender, **kw):
+        self.numNodesMultiplyer = kw["count"]
+        
+    def incrimentCount(self, sender, **kw):
+        self.nodeCount += 1
+        
+    def updateProgress(self):
+        self.progress.setValue(100 * (self.nodeCount) / (self.numNodes * self.numNodesMultiplyer))
     
     def updatePalette(self, color):
         palette = self.lbStatus.palette()
