@@ -43,7 +43,17 @@
        </property>
       </spacer>
      </item>
+     <item>
+      <widget class="QPushButton" name="btStop">
+       <property name="text">
+        <string>Stop</string>
+       </property>
+      </widget>
+     </item>
     </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_4"/>
    </item>
    <item>
     <widget class="QProgressBar" name="progress">

@@ -35,6 +35,8 @@ class ThreadHandler(QtWidgets.QWidget):
     def __init__(self):
         QtWidgets.QWidget.__init__(self)
         
+        self.running = False
+        
         # Pipeline running variables
         signal("end").connect(self.finishRun)
         signal("crash").connect(self.updateCrash)
@@ -49,6 +51,8 @@ class ThreadHandler(QtWidgets.QWidget):
         uic.loadUi(uiFile, self)
         self.treeWidget.itemClicked.connect(self.showPlot)
         self.progress.setValue(0)
+        
+        self.btStop.clicked.connect(self.stopRun)
          
         self.treeItem = {}
         self.walk = {}
@@ -78,6 +82,8 @@ class ThreadHandler(QtWidgets.QWidget):
         self.thread.file = file
         self.lbStatus.setText("Running")
         self.updatePalette("#0000FF")
+        
+        self.running = True
         self.thread.start()
         
     def getCount(self, sender, **kw):
@@ -97,12 +103,24 @@ class ThreadHandler(QtWidgets.QWidget):
     def updateCrash(self, sender):
         self.lbStatus.setText("Crash - See terminal")
         self.updatePalette("#FF0000")
+        self.running = False
+        
+    def stopRun(self):
+        if self.running == True:
+            self.thread.kill()
+            self.thread.join()
+            
+            self.lbStatus.setText("Run Stopped")
+            self.updatePalette("#FF0000")
+            
+            self.running = False
         
     # Swap from Blinker signal to PyQt5 signal to preserve
     # plots after thread dies.
     def finishRun(self, sender):
         self.lbStatus.setText("Complete")
         self.updatePalette("#00FF00")
+        self.running = False
         self.pipelineComplete.emit(True)
     
     def showPlot(self, item, column):
