@@ -1,0 +1,489 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Processing &mdash; EEG Toolkit 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Artifact Correction" href="artifactCorrection.html" />
+    <link rel="prev" title="Input" href="input.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EEG Toolkit
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../user.html">User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Nodes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="input.html">Input</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#raw-to-epoch">Raw To Epoch</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#attributes">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings-interface">Settings Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#filter">Filter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Settings Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#create-evoked">Create Evoked</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Attributes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#fit-ica">Fit ICA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Settings Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#apply-ica">Apply ICA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="artifactCorrection.html">Artifact Correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EEG Toolkit</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Processing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Nodes/processing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="processing">
+<h1>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="raw-to-epoch">
+<h2>Raw To Epoch<a class="headerlink" href="#raw-to-epoch" title="Permalink to this headline">¶</a></h2>
+<p>Converts the raw data into events. The event names are defined by their ID in the “Event Names” global variable.</p>
+<p>Uses the <a class="reference external" href="https://mne.tools/stable/generated/mne.Epochs.html">“Epochs” function</a> in the MNE library</p>
+<div class="section" id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="18%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="3">Input</td>
+</tr>
+<tr class="row-even"><td><strong>Name</strong></td>
+<td><strong>Type</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr class="row-odd"><td>Raw</td>
+<td>rawEEG</td>
+<td>Raw data from EEG file</td>
+</tr>
+<tr class="row-even"><td>Events</td>
+<td>epoch</td>
+<td>Event data from EEG file</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="18%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="3">Output</td>
+</tr>
+<tr class="row-even"><td><strong>Name</strong></td>
+<td><strong>Type</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr class="row-odd"><td>Epoch Data</td>
+<td>epoch</td>
+<td>Epoch data generated from inputs</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="settings-interface">
+<h3>Settings Interface<a class="headerlink" href="#settings-interface" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/Raw2Epoch.png" class="align-center" src="../_images/Raw2Epoch.png" />
+</div>
+</div>
+<div class="section" id="filter">
+<h2>Filter<a class="headerlink" href="#filter" title="Permalink to this headline">¶</a></h2>
+<p>Filters the data with either a low pass, high pass, band pass or notch filter</p>
+<p>All bar the notch filter us the MNE <a class="reference external" href="https://mne.tools/stable/generated/mne.io.Raw.html#mne.io.Raw.filter">“raw.filter”</a> function. The notch filter uses the <a class="reference external" href="https://mne.tools/stable/generated/mne.io.Raw.html#mne.io.Raw.notch_filter">“raw.notch_filter”</a> function</p>
+<div class="section" id="id1">
+<h3>Attributes<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="20%" />
+<col width="51%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="3">Input</td>
+</tr>
+<tr class="row-even"><td><strong>Name</strong></td>
+<td><strong>Type</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr class="row-odd"><td>Raw</td>
+<td>rawEEG</td>
+<td>Raw data to be filtered</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="20%" />
+<col width="51%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="3">Output</td>
+</tr>
+<tr class="row-even"><td><strong>Name</strong></td>
+<td><strong>Type</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr class="row-odd"><td>Filtered Raw</td>
+<td>rawEEG</td>
+<td>Filtered raw data</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id2">
+<h3>Settings Interface<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>CURRENTLY UNDERGOING REVAMP</p>
+</div>
+</div>
+<div class="section" id="create-evoked">
+<h2>Create Evoked<a class="headerlink" href="#create-evoked" title="Permalink to this headline">¶</a></h2>
+<p>Creates evoked (averaged event) data from epoch data</p>
+<p>Uses the <a class="reference external" href="https://mne.tools/stable/generated/mne.Epochs.html#mne.Epochs.average">Epochs.average</a> function in MNE with event names defined in the “Event Names” global variable</p>
+<div class="section" id="id3">
+<h3>Attributes<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="23%" />
+<col width="48%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="3">Input</td>
+</tr>
+<tr class="row-even"><td><strong>Name</strong></td>
+<td><strong>Type</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr class="row-odd"><td>Epoch Data</td>
+<td>epochs</td>
+<td>Event data</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="23%" />
+<col width="48%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="3">Output</td>
+</tr>
+<tr class="row-even"><td><strong>Name</strong></td>
+<td><strong>Type</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr class="row-odd"><td>Evoked Data</td>
+<td>evoked</td>
+<td>Averaged event data</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="fit-ica">
+<h2>Fit ICA<a class="headerlink" href="#fit-ica" title="Permalink to this headline">¶</a></h2>
+<p>Generates an ICA solution through the <a class="reference external" href="https://mne.tools/stable/generated/mne.preprocessing.run_ica.html#mne.preprocessing.run_ica">“preprocessing.run_ica” function</a></p>
+<div class="section" id="id4">
+<h3>Attributes<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="3">Input</td>
+</tr>
+<tr class="row-even"><td><strong>Name</strong></td>
+<td><strong>Type</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr class="row-odd"><td>Raw/Epoch</td>
+<td>rawEEG/Epoch</td>
+<td>Inputted raw or epoch data</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="21%" />
+<col width="58%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="3">Output</td>
+</tr>
+<tr class="row-even"><td><strong>Name</strong></td>
+<td><strong>Type</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr class="row-odd"><td>ICA Solution</td>
+<td>ICA</td>
+<td>Generated ICA solution for input data</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id5">
+<h3>Settings Interface<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/fitICA.png" class="align-center" src="../_images/fitICA.png" />
+<p>Skew, kurtosis and variance can be set to either an int value or a float value. If a float value is used, the sources variance/kurtosis/skew scores are calculated and all sources with scores higher than the given value are used. If an int value is used, the sources scores are orders and then the source in the position equal to the int value given is used.</p>
+</div>
+</div>
+<div class="section" id="apply-ica">
+<h2>Apply ICA<a class="headerlink" href="#apply-ica" title="Permalink to this headline">¶</a></h2>
+<p>Applies to the ICA solution to a set of epoch data through the <a class="reference external" href="https://mne.tools/stable/generated/mne.preprocessing.ICA.html#mne.preprocessing.ICA.apply">ICA.apply function</a></p>
+<div class="section" id="id6">
+<h3>Attributes<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="14%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="3">Input</td>
+</tr>
+<tr class="row-even"><td><strong>Name</strong></td>
+<td><strong>Type</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr class="row-odd"><td>ICA Solution</td>
+<td>ICA</td>
+<td>Generated ICA solution</td>
+</tr>
+<tr class="row-even"><td>Epoch Data</td>
+<td>epoch</td>
+<td>Epoch data to apply the ICA to</td>
+</tr>
+<tr class="row-odd"><td>Excluded Channels</td>
+<td>list</td>
+<td>A list of channels to be excluded. Optional</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="14%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="3">Output</td>
+</tr>
+<tr class="row-even"><td><strong>Name</strong></td>
+<td><strong>Type</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr class="row-odd"><td>Epochs</td>
+<td>epoch</td>
+<td>Epoch data with applied ICA solution</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="artifactCorrection.html" class="btn btn-neutral float-right" title="Artifact Correction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="input.html" class="btn btn-neutral float-left" title="Input" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Thomas Mudway, Kiret Dhindsa
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
