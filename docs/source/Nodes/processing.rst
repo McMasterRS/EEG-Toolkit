@@ -63,7 +63,8 @@ Attributes
 Settings Interface
 ---------------------
 
-CURRENTLY UNDERGOING REVAMP
+.. image:: ../Images/Nodes/Filter.png
+    :align: center
 
 Create Evoked
 ##############
@@ -149,3 +150,8 @@ Attributes
 +-------------------+----------+---------------------------------------------+
 | Epochs            | epoch    | Epoch data with applied ICA solution        |
 +-------------------+----------+---------------------------------------------+
+
+Settings Interface
+-------------------
+
+None

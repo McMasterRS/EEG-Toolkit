@@ -188,26 +188,26 @@
 <p>Imports EEG data into the system to be manipulated by the user</p>
 <div class="section" id="attributes">
 <h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="13%" />
-<col width="13%" />
-<col width="74%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 74%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td colspan="3">Output</td>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>Output</p></td>
 </tr>
-<tr class="row-even"><td><strong>Name</strong></td>
-<td><strong>Type</strong></td>
-<td><strong>Description</strong></td>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Type</strong></p></td>
+<td><p><strong>Description</strong></p></td>
 </tr>
-<tr class="row-odd"><td>Raw</td>
-<td>rawEEG</td>
-<td>Contains the channel data for the EEG dataset</td>
+<tr class="row-odd"><td><p>Raw</p></td>
+<td><p>rawEEG</p></td>
+<td><p>Contains the channel data for the EEG dataset</p></td>
 </tr>
-<tr class="row-even"><td>Events</td>
-<td>events</td>
-<td>Contains the event times and types for the EEG dataset</td>
+<tr class="row-even"><td><p>Events</p></td>
+<td><p>events</p></td>
+<td><p>Contains the event times and types for the EEG dataset</p></td>
 </tr>
 </tbody>
 </table>
@@ -217,37 +217,37 @@
 <a class="reference internal image-reference" href="../_images/ImportData.png"><img alt="../_images/ImportData.png" class="align-center" src="../_images/ImportData.png" style="width: 700px;" /></a>
 <div class="section" id="bdf-files">
 <h4>BDF Files<a class="headerlink" href="#bdf-files" title="Permalink to this headline">¶</a></h4>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="6%" />
-<col width="94%" />
+<col style="width: 6%" />
+<col style="width: 94%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><strong>Setting</strong></td>
-<td><strong>Description</strong></td>
+<tbody>
+<tr class="row-odd"><td><p><strong>Setting</strong></p></td>
+<td><p><strong>Description</strong></p></td>
 </tr>
-<tr class="row-even"><td>Event Mask</td>
-<td>The binary mask that isolates the signal data from the event information in the BDF file. Default can be left as 255 to use the first 2 bytes of the data for the signal and the 3rd as the event carrier.</td>
+<tr class="row-even"><td><p>Event Mask</p></td>
+<td><p>The binary mask that isolates the signal data from the event information in the BDF file. Default can be left as 255 to use the first 2 bytes of the data for the signal and the 3rd as the event carrier.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="numpy-files">
 <h4>Numpy Files<a class="headerlink" href="#numpy-files" title="Permalink to this headline">¶</a></h4>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="13%" />
-<col width="88%" />
+<col style="width: 13%" />
+<col style="width: 88%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><strong>Setting</strong></td>
-<td><strong>Description</strong></td>
+<tbody>
+<tr class="row-odd"><td><p><strong>Setting</strong></p></td>
+<td><p><strong>Description</strong></p></td>
 </tr>
-<tr class="row-even"><td>Channel Types</td>
-<td>A text file that contains the type (eeg/eog/ecg) of each channel of the data as a comma seperated list.</td>
+<tr class="row-even"><td><p>Channel Types</p></td>
+<td><p>A text file that contains the type (eeg/eog/ecg) of each channel of the data as a comma seperated list.</p></td>
 </tr>
-<tr class="row-odd"><td>Sample Freq</td>
-<td>The sample frequency of the data in Hz</td>
+<tr class="row-odd"><td><p>Sample Freq</p></td>
+<td><p>The sample frequency of the data in Hz</p></td>
 </tr>
 </tbody>
 </table>
@@ -259,22 +259,22 @@
 <p>Imports a single epoch file. Multiple file input similar to the Import Data node is in development</p>
 <div class="section" id="id1">
 <h3>Attributes<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="24%" />
-<col width="20%" />
-<col width="57%" />
+<col style="width: 24%" />
+<col style="width: 20%" />
+<col style="width: 57%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td colspan="3">Output</td>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>Output</p></td>
 </tr>
-<tr class="row-even"><td><strong>Name</strong></td>
-<td><strong>Type</strong></td>
-<td><strong>Description</strong></td>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Type</strong></p></td>
+<td><p><strong>Description</strong></p></td>
 </tr>
-<tr class="row-odd"><td>Epoch Data</td>
-<td>epoch</td>
-<td>Epoch data loaded from file</td>
+<tr class="row-odd"><td><p>Epoch Data</p></td>
+<td><p>epoch</p></td>
+<td><p>Epoch data loaded from file</p></td>
 </tr>
 </tbody>
 </table>
@@ -289,22 +289,22 @@
 <p>Imports a single evoked file. Multiple file input similar to the Import Data node is in development</p>
 <div class="section" id="id3">
 <h3>Attributes<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="23%" />
-<col width="19%" />
-<col width="58%" />
+<col style="width: 23%" />
+<col style="width: 19%" />
+<col style="width: 58%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td colspan="3">Output</td>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>Output</p></td>
 </tr>
-<tr class="row-even"><td><strong>Name</strong></td>
-<td><strong>Type</strong></td>
-<td><strong>Description</strong></td>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Type</strong></p></td>
+<td><p><strong>Description</strong></p></td>
 </tr>
-<tr class="row-odd"><td>Epoch Data</td>
-<td>evoked</td>
-<td>Evoked data loaded from file</td>
+<tr class="row-odd"><td><p>Epoch Data</p></td>
+<td><p>evoked</p></td>
+<td><p>Evoked data loaded from file</p></td>
 </tr>
 </tbody>
 </table>
@@ -319,22 +319,22 @@
 <p>Imports a single ICA solution. Multiple file input similar to the Import Data node is in development</p>
 <div class="section" id="id5">
 <h3>Attributes<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="26%" />
-<col width="19%" />
-<col width="56%" />
+<col style="width: 26%" />
+<col style="width: 19%" />
+<col style="width: 56%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td colspan="3">Output</td>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>Output</p></td>
 </tr>
-<tr class="row-even"><td><strong>Name</strong></td>
-<td><strong>Type</strong></td>
-<td><strong>Description</strong></td>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Type</strong></p></td>
+<td><p><strong>Description</strong></p></td>
 </tr>
-<tr class="row-odd"><td>ICA Solution</td>
-<td>ICA</td>
-<td>ICA solution loaded from file</td>
+<tr class="row-odd"><td><p>ICA Solution</p></td>
+<td><p>ICA</p></td>
+<td><p>ICA solution loaded from file</p></td>
 </tr>
 </tbody>
 </table>

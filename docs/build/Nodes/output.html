@@ -89,7 +89,29 @@
 <li class="toctree-l1"><a class="reference internal" href="input.html">Input</a></li>
 <li class="toctree-l1"><a class="reference internal" href="processing.html">Processing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="artifactCorrection.html">Artifact Correction</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Output</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#save-raw">Save Raw</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#attributes">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings-interface">Settings Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#save-epochs">Save Epochs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Settings Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#save-evoked">Save Evoked</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Settings Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#save-ica">Save ICA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Settings Interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
 </ul>
 
@@ -157,6 +179,126 @@
             
   <div class="section" id="output">
 <h1>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="save-raw">
+<h2>Save Raw<a class="headerlink" href="#save-raw" title="Permalink to this headline">¶</a></h2>
+<p>Saves Raw data to file</p>
+<div class="section" id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 18%" />
+<col style="width: 61%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>Input</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Type</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Raw</p></td>
+<td><p>rawEEG</p></td>
+<td><p>Raw data to save</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="settings-interface">
+<h3>Settings Interface<a class="headerlink" href="#settings-interface" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/Raw2Epoch.png" class="align-center" src="../_images/Raw2Epoch.png" />
+</div>
+</div>
+<div class="section" id="save-epochs">
+<h2>Save Epochs<a class="headerlink" href="#save-epochs" title="Permalink to this headline">¶</a></h2>
+<p>Saves Epoch data to file</p>
+<div class="section" id="id1">
+<h3>Attributes<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 18%" />
+<col style="width: 61%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>Input</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Type</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Epochs</p></td>
+<td><p>epoch</p></td>
+<td><p>Epoch data to save</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id2">
+<h3>Settings Interface<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference internal" href="#save-raw">Save Raw</a></p>
+</div>
+</div>
+<div class="section" id="save-evoked">
+<h2>Save Evoked<a class="headerlink" href="#save-evoked" title="Permalink to this headline">¶</a></h2>
+<p>Saves Evoked data to file</p>
+<div class="section" id="id3">
+<h3>Attributes<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 18%" />
+<col style="width: 61%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>Input</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Type</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Evoked</p></td>
+<td><p>evoked</p></td>
+<td><p>Evoked data to save</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id4">
+<h3>Settings Interface<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference internal" href="#save-raw">Save Raw</a></p>
+</div>
+</div>
+<div class="section" id="save-ica">
+<h2>Save ICA<a class="headerlink" href="#save-ica" title="Permalink to this headline">¶</a></h2>
+<p>Saves ICA solution to file</p>
+<div class="section" id="id5">
+<h3>Attributes<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 18%" />
+<col style="width: 57%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>Input</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Type</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>ICA Solution</p></td>
+<td><p>ICA</p></td>
+<td><p>ICA solution to save</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id6">
+<h3>Settings Interface<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference internal" href="#save-raw">Save Raw</a></p>
+</div>
+</div>
 </div>
 
 

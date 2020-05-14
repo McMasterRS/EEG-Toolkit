@@ -759,7 +759,7 @@
                 "settingsClass" : "PlotSettings"
             }
         },
-        "Batch Peak Analysis" : {
+        "Grand Peak Analysis" : {
             "preset" : "node_default",
             "file" : "Plotting/batchAnalysis.py",
             "alternate" : true,
@@ -780,7 +780,7 @@
                 "settingsClass" : "BatchAnalysisSettings"
             }
         },
-        "Batch Average Signal" : {
+        "Grand Average Signal" : {
             "preset" : "node_default",
             "file" : "Plotting/batchAvSignal.py",
             "alternate" : true,

@@ -12,7 +12,16 @@ class FilterSettings(CustomSettings):
     def buildUI(self, settings):
     
         self.layout = QtWidgets.QVBoxLayout()
-        self.tabs = QtWidgets.QTabWidget()
+        
+        self.widgetStack = QtWidgets.QStackedWidget(self)
+        
+        cbLabel = QtWidgets.QLabel("Filter Type: ")
+        self.cbType = QtWidgets.QComboBox()
+        self.cbType.addItems(["Low Pass", "High Pass", "Band Pass", "Notch"])
+        self.cbType.setSizePolicy(QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed))
+        typeLayout = QtWidgets.QHBoxLayout()
+        typeLayout.addWidget(cbLabel)
+        typeLayout.addWidget(self.cbType)
         
         self.lowPass = QtWidgets.QWidget()
         self.highPass = QtWidgets.QWidget()
@@ -96,7 +105,7 @@ class FilterSettings(CustomSettings):
         self.method.currentIndexChanged.connect(self.updateMethod)
         if "method" in settings.keys():
             self.method.setCurrentText(settings["method"])
-        self.updateName(self.method.currentIndex())
+        self.updateType(self.method.currentIndex())
             
         self.form.insertRow(-1, methodLabel, self.method)
         self.form.insertRow(-1, phaseLabel, self.phase)
@@ -107,17 +116,19 @@ class FilterSettings(CustomSettings):
         self.bandPass.setLayout(self.bpLayout)
         self.notch.setLayout(self.nLayout)
         
-        self.tabs.addTab(self.lowPass, "Low Pass")
-        self.tabs.addTab(self.highPass, "High Pass")
-        self.tabs.addTab(self.bandPass, "Band Pass")
-        self.tabs.addTab(self.notch, "Notch")
-        self.tabs.currentChanged.connect(self.updateName)
+        self.widgetStack.addWidget(self.lowPass)
+        self.widgetStack.addWidget(self.highPass)
+        self.widgetStack.addWidget(self.bandPass)
+        self.widgetStack.addWidget(self.notch)
+        
+        self.cbType.currentIndexChanged.connect(self.updateType)
         self.resize(360,150)
         
         if "tab" in settings.keys():
-            self.tabs.setCurrentIndex(settings["tab"])
+            self.widgetStack.setCurrentIndex(settings["tab"])
         
-        self.layout.addWidget(self.tabs)
+        self.layout.addItem(typeLayout)
+        self.layout.addWidget(self.widgetStack)
         self.layout.addItem(self.form)
         self.setLayout(self.layout)
         
@@ -135,7 +146,7 @@ class FilterSettings(CustomSettings):
         settingList["method"] = self.method.currentText()
         settingList["phase"] = self.phase.currentText()
         settingList["firWindow"] = self.firWindow.currentText()
-        settingList["tab"] = self.tabs.currentIndex()
+        settingList["tab"] = self.cbType.currentIndex()
         
         varList = settingList.copy()
         settingList["settingsFile"] = self.settings["settingsFile"]
@@ -152,7 +163,8 @@ class FilterSettings(CustomSettings):
             self.phase.setDisabled(False)
             self.firWindow.setDisabled(False)
             
-    def updateName(self, index):
+    def updateType(self, index):
+        self.widgetStack.setCurrentIndex(index)
         names = ["Low Pass", "High Pass", "Band Pass", "Notch"]
         self.parent.name = names[index] + " Filter"
         

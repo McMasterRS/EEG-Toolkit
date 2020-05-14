@@ -71,7 +71,7 @@ class ThreadHandler(QtWidgets.QWidget):
         
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.updateProgress)
-        self.timer.start(500)
+        self.timer.start(50)
 
         # Build temporary files
         if os.path.exists("./wariotmp"):
