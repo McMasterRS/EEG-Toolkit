@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Output &mdash; EEG Toolkit 1.0.0 documentation</title>
+  <title>Input &mdash; EEG Toolkit 1.0.0 documentation</title>
   
 
   
@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Plotting" href="plotting.html" />
-    <link rel="prev" title="Artifact Correction" href="artifactCorrection.html" /> 
+    <link rel="next" title="Processing" href="processing.html" />
+    <link rel="prev" title="User Guide" href="../user.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,32 +86,35 @@
 </ul>
 <p class="caption"><span class="caption-text">Nodes</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="input.html">Input</a></li>
-<li class="toctree-l1"><a class="reference internal" href="processing.html">Processing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="artifactCorrection.html">Artifact Correction</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Output</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#save-raw">Save Raw</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Input</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#import-data">Import Data</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#attributes">Attributes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#settings-interface">Settings Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings-interface">Settings Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bdf-files">BDF Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#numpy-files">Numpy Files</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#save-epochs">Save Epochs</a><ul>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#import-epochs">Import Epochs</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">Attributes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">Settings Interface</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#save-evoked">Save Evoked</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#import-evoked">Import Evoked</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id3">Attributes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id4">Settings Interface</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#save-ica">Save ICA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#import-ica">Import ICA</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id5">Attributes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id6">Settings Interface</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="processing.html">Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
 </ul>
 
@@ -158,13 +161,13 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Output</li>
+      <li>Input</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Nodes/output.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Nodes/input.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -177,21 +180,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="output">
-<h1>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="save-raw">
-<h2>Save Raw<a class="headerlink" href="#save-raw" title="Permalink to this headline">¶</a></h2>
-<p>Saves Raw data to file</p>
+  <div class="section" id="input">
+<h1>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="import-data">
+<h2>Import Data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h2>
+<p>Imports EEG data into the system to be manipulated by the user</p>
 <div class="section" id="attributes">
 <h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 21%" />
-<col style="width: 18%" />
-<col style="width: 61%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 74%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td colspan="3"><p>Input</p></td>
+<tr class="row-odd"><td colspan="3"><p>Output</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Name</strong></p></td>
 <td><p><strong>Type</strong></p></td>
@@ -199,89 +202,130 @@
 </tr>
 <tr class="row-odd"><td><p>Raw</p></td>
 <td><p>rawEEG</p></td>
-<td><p>Raw data to save</p></td>
+<td><p>Contains the channel data for the EEG dataset</p></td>
+</tr>
+<tr class="row-even"><td><p>Events</p></td>
+<td><p>events</p></td>
+<td><p>Contains the event times and types for the EEG dataset</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="settings-interface">
 <h3>Settings Interface<a class="headerlink" href="#settings-interface" title="Permalink to this headline">¶</a></h3>
-<img alt="../_images/Raw2Epoch.png" class="align-center" src="../_images/Raw2Epoch.png" />
+<a class="reference internal image-reference" href="../_images/ImportData.png"><img alt="../_images/ImportData.png" class="align-center" src="../_images/ImportData.png" style="width: 700px;" /></a>
+<div class="section" id="bdf-files">
+<h4>BDF Files<a class="headerlink" href="#bdf-files" title="Permalink to this headline">¶</a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 94%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Setting</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Event Mask</p></td>
+<td><p>The binary mask that isolates the signal data from the event information in the BDF file. Default can be left as 255 to use the first 2 bytes of the data for the signal and the 3rd as the event carrier.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="numpy-files">
+<h4>Numpy Files<a class="headerlink" href="#numpy-files" title="Permalink to this headline">¶</a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 88%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Setting</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Channel Types</p></td>
+<td><p>A text file that contains the type (eeg/eog/ecg) of each channel of the data as a comma seperated list.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sample Freq</p></td>
+<td><p>The sample frequency of the data in Hz</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-<div class="section" id="save-epochs">
-<h2>Save Epochs<a class="headerlink" href="#save-epochs" title="Permalink to this headline">¶</a></h2>
-<p>Saves Epoch data to file</p>
+</div>
+<div class="section" id="import-epochs">
+<h2>Import Epochs<a class="headerlink" href="#import-epochs" title="Permalink to this headline">¶</a></h2>
+<p>Imports a single epoch file. Multiple file input similar to the Import Data node is in development</p>
 <div class="section" id="id1">
 <h3>Attributes<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 21%" />
-<col style="width: 18%" />
-<col style="width: 61%" />
+<col style="width: 24%" />
+<col style="width: 20%" />
+<col style="width: 57%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td colspan="3"><p>Input</p></td>
+<tr class="row-odd"><td colspan="3"><p>Output</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Name</strong></p></td>
 <td><p><strong>Type</strong></p></td>
 <td><p><strong>Description</strong></p></td>
 </tr>
-<tr class="row-odd"><td><p>Epochs</p></td>
+<tr class="row-odd"><td><p>Epoch Data</p></td>
 <td><p>epoch</p></td>
-<td><p>Epoch data to save</p></td>
+<td><p>Epoch data loaded from file</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="id2">
 <h3>Settings Interface<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<p>See <a class="reference internal" href="#save-raw">Save Raw</a></p>
+<a class="reference internal image-reference" href="../_images/ImportEpochs.png"><img alt="../_images/ImportEpochs.png" class="align-center" src="../_images/ImportEpochs.png" style="width: 400px;" /></a>
 </div>
 </div>
-<div class="section" id="save-evoked">
-<h2>Save Evoked<a class="headerlink" href="#save-evoked" title="Permalink to this headline">¶</a></h2>
-<p>Saves Evoked data to file</p>
+<div class="section" id="import-evoked">
+<h2>Import Evoked<a class="headerlink" href="#import-evoked" title="Permalink to this headline">¶</a></h2>
+<p>Imports a single evoked file. Multiple file input similar to the Import Data node is in development</p>
 <div class="section" id="id3">
 <h3>Attributes<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 21%" />
-<col style="width: 18%" />
-<col style="width: 61%" />
+<col style="width: 23%" />
+<col style="width: 19%" />
+<col style="width: 58%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td colspan="3"><p>Input</p></td>
+<tr class="row-odd"><td colspan="3"><p>Output</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Name</strong></p></td>
 <td><p><strong>Type</strong></p></td>
 <td><p><strong>Description</strong></p></td>
 </tr>
-<tr class="row-odd"><td><p>Evoked</p></td>
+<tr class="row-odd"><td><p>Epoch Data</p></td>
 <td><p>evoked</p></td>
-<td><p>Evoked data to save</p></td>
+<td><p>Evoked data loaded from file</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="id4">
 <h3>Settings Interface<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<p>See <a class="reference internal" href="#save-raw">Save Raw</a></p>
+<p>See <a class="reference internal" href="#import-epochs">Import Epochs</a></p>
 </div>
 </div>
-<div class="section" id="save-ica">
-<h2>Save ICA<a class="headerlink" href="#save-ica" title="Permalink to this headline">¶</a></h2>
-<p>Saves ICA solution to file</p>
+<div class="section" id="import-ica">
+<h2>Import ICA<a class="headerlink" href="#import-ica" title="Permalink to this headline">¶</a></h2>
+<p>Imports a single ICA solution. Multiple file input similar to the Import Data node is in development</p>
 <div class="section" id="id5">
 <h3>Attributes<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 18%" />
-<col style="width: 57%" />
+<col style="width: 26%" />
+<col style="width: 19%" />
+<col style="width: 56%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td colspan="3"><p>Input</p></td>
+<tr class="row-odd"><td colspan="3"><p>Output</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Name</strong></p></td>
 <td><p><strong>Type</strong></p></td>
@@ -289,14 +333,14 @@
 </tr>
 <tr class="row-odd"><td><p>ICA Solution</p></td>
 <td><p>ICA</p></td>
-<td><p>ICA solution to save</p></td>
+<td><p>ICA solution loaded from file</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="id6">
 <h3>Settings Interface<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
-<p>See <a class="reference internal" href="#save-raw">Save Raw</a></p>
+<p>See <a class="reference internal" href="#import-epochs">Import Epochs</a></p>
 </div>
 </div>
 </div>
@@ -309,10 +353,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="plotting.html" class="btn btn-neutral float-right" title="Plotting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="processing.html" class="btn btn-neutral float-right" title="Processing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="artifactCorrection.html" class="btn btn-neutral float-left" title="Artifact Correction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../user.html" class="btn btn-neutral float-left" title="User Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

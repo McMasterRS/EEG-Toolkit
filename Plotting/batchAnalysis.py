@@ -200,10 +200,10 @@ class batchAnalysis(Node):
             elif type == "pkl":
                 pickle.dump(fig2, open(f, "wb"))
             
-        d = {"meanLat" : meanLatencies.transpose(2, 0, 1)[0],
-             "meanAmp" : meanAmplitudes.transpose(2, 0, 1)[0],
-             "stdLat"  : stdevLatencies.transpose(2, 0, 1)[0],
-             "stdAmp"  : stdevAmplitudes.transpose(2, 0, 1)[0],
+        d = {"meanLat" : meanLatencies,
+             "meanAmp" : meanAmplitudes,
+             "stdLat"  : stdevLatencies,
+             "stdAmp"  : stdevAmplitudes,
              "chNames" : self.chanNames,
              "evNames" : self.eventNames}
             

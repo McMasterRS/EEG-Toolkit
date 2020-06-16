@@ -1,0 +1,568 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Plotting &mdash; EEG Toolkit 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Output" href="output.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EEG Toolkit
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../user.html">User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Nodes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="input.html">Input</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processing.html">Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">Output</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Plotting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#plot-raw">Plot Raw</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#attributes">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings-interface">Settings Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#plot-sources">Plot Sources</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Settings Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#plot-components">Plot Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Settings Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#plot-properties">Plot Properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Settings Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#plot-peak">Plot Peak</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Settings Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#plot-local-peaks">Plot Local Peaks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">Settings Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#plot-evoked-times">Plot Evoked Times</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">Settings Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#plot-evoked-comparison">Plot Evoked Comparison</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id14">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">Settings Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#grand-average-signal">Grand Average Signal</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id16">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">Settings Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#grand-peak-analysis">Grand Peak Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id18">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">Settings Interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EEG Toolkit</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Plotting</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Nodes/plotting.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="plotting">
+<h1>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="plot-raw">
+<h2>Plot Raw<a class="headerlink" href="#plot-raw" title="Permalink to this headline">¶</a></h2>
+<p>Plots raw EEG data using the MNE <a class="reference external" href="https://mne.tools/stable/generated/mne.io.Raw.html#mne.io.Raw.plot">raw.plot function.</a></p>
+<div class="section" id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 18%" />
+<col style="width: 61%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>Input</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Type</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Raw</p></td>
+<td><p>rawEEG</p></td>
+<td><p>Raw EEG data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="settings-interface">
+<h3>Settings Interface<a class="headerlink" href="#settings-interface" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="../_images/PlotRaw.png"><img alt="../_images/PlotRaw.png" class="align-center" src="../_images/PlotRaw.png" style="width: 400px;" /></a>
+<p>Please note: File identifiers must be unique for each node so as to avoid overwriting each other. If running a batch pipeline, each input file’s output plots will be given a unique name that includes this identifier.</p>
+</div>
+</div>
+<div class="section" id="plot-sources">
+<h2>Plot Sources<a class="headerlink" href="#plot-sources" title="Permalink to this headline">¶</a></h2>
+<p>Plots the sources created from independant component analysis against time using the MNE <a class="reference external" href="https://mne.tools/dev/generated/mne.preprocessing.ICA.html#mne.preprocessing.ICA.plot_sources">ica.plot_sources function.</a></p>
+<div class="section" id="id1">
+<h3>Attributes<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 55%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>Input</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Type</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Data</p></td>
+<td><p>rawEEG/epoch</p></td>
+<td><p>Raw EEG/epoch data</p></td>
+</tr>
+<tr class="row-even"><td><p>ICA Solution</p></td>
+<td><p>ICA</p></td>
+<td><p>ICA solution to apply to data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id2">
+<h3>Settings Interface<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Identical to <a class="reference internal" href="#plot-raw">Plot Raw</a></p>
+</div>
+</div>
+<div class="section" id="plot-components">
+<h2>Plot Components<a class="headerlink" href="#plot-components" title="Permalink to this headline">¶</a></h2>
+<p>Plots the ICA components using the MNE <a class="reference external" href="https://mne.tools/dev/generated/mne.preprocessing.ICA.html#mne.preprocessing.ICA.plot_components">ica.plot_components function.</a></p>
+<div class="section" id="id3">
+<h3>Attributes<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 22%" />
+<col style="width: 56%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>Input</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Type</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>ICA Solution</p></td>
+<td><p>ICA</p></td>
+<td><p>ICA solution to plot components of</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id4">
+<h3>Settings Interface<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>Identical to <a class="reference internal" href="#plot-raw">Plot Raw</a></p>
+</div>
+</div>
+<div class="section" id="plot-properties">
+<h2>Plot Properties<a class="headerlink" href="#plot-properties" title="Permalink to this headline">¶</a></h2>
+<p>Plots the properties of each ICA component using the MNE <a class="reference external" href="https://mne.tools/dev/generated/mne.preprocessing.ICA.html#mne.preprocessing.ICA.plot_properties">ica.plot_properties function.</a></p>
+<div class="section" id="id5">
+<h3>Attributes<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 55%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>Input</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Type</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Data</p></td>
+<td><p>rawEEG/epoch</p></td>
+<td><p>Raw EEG/epoch data</p></td>
+</tr>
+<tr class="row-even"><td><p>ICA Solution</p></td>
+<td><p>ICA</p></td>
+<td><p>ICA solution to apply to data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id6">
+<h3>Settings Interface<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>Identical to <a class="reference internal" href="#plot-raw">Plot Raw</a></p>
+</div>
+</div>
+<div class="section" id="plot-peak">
+<h2>Plot Peak<a class="headerlink" href="#plot-peak" title="Permalink to this headline">¶</a></h2>
+<p>Creates a plot of the time series evoked event data for each channel, with a marker showing the peak signal time. The scalp plot at the peak time is shown above the time series data. Uses the MNE <a class="reference external" href="https://mne.tools/stable/generated/mne.Evoked.html#mne.Evoked.plot_joint">evoked.plot_joint function.</a> Creates individual plots for each event given in the global variables</p>
+<div class="section" id="id7">
+<h3>Attributes<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 55%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>Input</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Type</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Evoked Data</p></td>
+<td><p>evoked</p></td>
+<td><p>Averaged event (evoked) data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id8">
+<h3>Settings Interface<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>Identical to <a class="reference internal" href="#plot-raw">Plot Raw</a></p>
+</div>
+</div>
+<div class="section" id="plot-local-peaks">
+<h2>Plot Local Peaks<a class="headerlink" href="#plot-local-peaks" title="Permalink to this headline">¶</a></h2>
+<p>Creates a plot of the time series evoked event data for each channel, with a marker showing the time of the local peak signal. The scalp plot at the peak time is shown above the time series data. Uses the MNE <a class="reference external" href="https://mne.tools/stable/generated/mne.Evoked.html#mne.Evoked.plot_joint">evoked.plot_joint function.</a> Creates individual plots for each event given in the global variables</p>
+<div class="section" id="id10">
+<h3>Attributes<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 55%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>Input</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Type</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Evoked Data</p></td>
+<td><p>evoked</p></td>
+<td><p>Averaged event (evoked) data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id11">
+<h3>Settings Interface<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>Identical to <a class="reference internal" href="#plot-raw">Plot Raw</a></p>
+</div>
+</div>
+<div class="section" id="plot-evoked-times">
+<h2>Plot Evoked Times<a class="headerlink" href="#plot-evoked-times" title="Permalink to this headline">¶</a></h2>
+<p>Identical to Plot Peak but gives a scalp plot at regular intervals along the time series.</p>
+<div class="section" id="id12">
+<h3>Attributes<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 55%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>Input</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Type</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Evoked Data</p></td>
+<td><p>evoked</p></td>
+<td><p>Averaged event (evoked) data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id13">
+<h3>Settings Interface<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<p>Identical to <a class="reference internal" href="#plot-raw">Plot Raw</a></p>
+</div>
+</div>
+<div class="section" id="plot-evoked-comparison">
+<h2>Plot Evoked Comparison<a class="headerlink" href="#plot-evoked-comparison" title="Permalink to this headline">¶</a></h2>
+<p>Plots a comparison of averaged time series data for all channels for each event given in the global variables. This uses the MNE <a class="reference external" href="https://mne.tools/stable/generated/mne.viz.plot_compare_evokeds.html">mne.viz.plot_compare_evokeds function.</a></p>
+<div class="section" id="id14">
+<h3>Attributes<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 55%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>Input</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Type</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Evoked Data</p></td>
+<td><p>evoked</p></td>
+<td><p>Averaged event (evoked) data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id15">
+<h3>Settings Interface<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<p>Identical to <a class="reference internal" href="#plot-raw">Plot Raw</a></p>
+</div>
+</div>
+<div class="section" id="grand-average-signal">
+<h2>Grand Average Signal<a class="headerlink" href="#grand-average-signal" title="Permalink to this headline">¶</a></h2>
+<p>Plots the grand (combined) average signal for each channel, for each event, averaged across all input files.</p>
+<div class="section" id="id16">
+<h3>Attributes<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 55%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>Input</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Type</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Evoked Data</p></td>
+<td><p>evoked</p></td>
+<td><p>Averaged event (evoked) data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id17">
+<h3>Settings Interface<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<p>Identical to <a class="reference internal" href="#plot-raw">Plot Raw</a></p>
+</div>
+</div>
+<div class="section" id="grand-peak-analysis">
+<h2>Grand Peak Analysis<a class="headerlink" href="#grand-peak-analysis" title="Permalink to this headline">¶</a></h2>
+<p>Produces bar charts of the mean peak amplitude and latencies for each channel, for each event, averaged across all input files. The standard deviation of each value is given as a y-axis error bar.</p>
+<div class="section" id="id18">
+<h3>Attributes<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 55%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>Input</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Type</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Evoked Data</p></td>
+<td><p>evoked</p></td>
+<td><p>Averaged event (evoked) data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id19">
+<h3>Settings Interface<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="../_images/GrandPeak.png"><img alt="../_images/GrandPeak.png" class="align-center" src="../_images/GrandPeak.png" style="width: 400px;" /></a>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="output.html" class="btn btn-neutral float-left" title="Output" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Thomas Mudway, Kiret Dhindsa
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

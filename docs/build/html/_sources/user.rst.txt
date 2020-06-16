@@ -17,6 +17,10 @@ Initializing Global Variables
 
 There are several global variables that must be initialized before the pipeline can be run. As the EEG toolkit has been enabled, these will have been automatically added to the global variables window (Ctrl+G). This process must be done each time a pipeline is created using this toolkit.
 
+.. image:: ./Images/user/globalVars.png
+    :width: 600
+    :align: center
+
 Output Folder
 --------------
 
@@ -52,7 +56,7 @@ The EEG Toolkit comes with a custom runtime display that allows for the user to 
 
 To install the runtime display, open the WARIO Editor preferences window (Ctrl+P) and check the "Custom" box under runtime display. Then use the "Load" button to navigate to the `frontend.py` file in the EEG Toolkit directory. When the pipeline is ran, the runtime display, seen below, will show.
 
-.. image:: ./Images/frontend.png
+.. image:: ./Images/user/frontend.png
     :width: 400
     :align: center
 	
@@ -60,7 +64,7 @@ The top section of the window contains the progress bar and current pipeline sta
 
 Items in the tree that show this icon |plotIcon| can be double clicked to display the relevant plot. If a node creates multiple plots (such as those for event analysis), the node can be expanded and each plot viewed seperately. 
 
-.. |plotIcon|  image:: ./Images/plotIcon.png
+.. |plotIcon|  image:: ./Images/user/plotIcon.png
 
 Building A Pipeline
 ####################

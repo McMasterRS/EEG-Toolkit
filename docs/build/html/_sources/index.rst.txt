@@ -28,6 +28,5 @@ Installation
     
     Nodes/input
     Nodes/processing
-    Nodes/artifactCorrection
     Nodes/output
     Nodes/plotting

@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 import mne
 import numpy as np
 
-from extensions.WalkTree import WalkTree, TreeItem
+from WarioEditor.extensions.WalkTree import WalkTree, TreeItem
 
 def runPipeline(file):
     threadhandler = ThreadHandler()
@@ -165,7 +165,23 @@ class ThreadHandler(QtWidgets.QWidget):
             chName, latency, amplitude = evoked.get_peak(return_amplitude = True)
             self.currentPlot = evoked.plot_joint(title = "Peak for event ID {0}".format(evoked.comment), times=latency, show = False)
             self.currentPlot.show()
+        elif f["type"] == "batchAnalysis":
+            data = f["data"]
+            
+            fig, ax = plt.subplots()
+            width = 0.35
+            for i in range(len(meanLatencies)):
+                ax.bar(np.arange(len(meanLatencies[i])) + width * i, meanLatencies.transpose(2, 0, 1)[0][i], yerr = stdevLatencies.transpose(2, 0, 1)[0][i], width = width, align = 'center')
                 
+            ax.set_xticks(np.arange(len(meanLatencies[i])))
+            ax.set_xticklabels(self.chanNames)
+            ax.set_title("Mean Peak Latencies".format(self.eventNames[i]))
+            ax.set_ylabel("Mean Peak Latency")
+            ax.set_xlabel("Channel")
+            
+            fig.tight_layout()
+            fig.legend(self.eventNames, title = "Event ID", framealpha = 1)
+            
     def showPlots(self, val):
 
         # Walk through the tree and build the base layout for each output
@@ -191,7 +207,7 @@ class ThreadHandler(QtWidgets.QWidget):
                 continue
                 
             if "bulk" not in self.treeItem.keys():
-                self.treeItem["bulk"] = TreeItem(self.treeWidget, ["Bulk Results"], None)
+                self.treeItem["bulk"] = TreeItem(self.treeWidget, ["Grand Results"], None)
                 
             item = TreeItem(self.treeItem["bulk"], [f], None)
             item.file = os.path.join(".", "wariotmp", f)

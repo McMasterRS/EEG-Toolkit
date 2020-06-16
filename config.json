@@ -1,6 +1,6 @@
 {   
     "name" : "EEG",
-    "docs" : "docs/build/html/",
+    "docs" : "docs/build/",
     "global_variables":{
         "Output Folder" : {
             "file": "wario.GlobalWidgets",
